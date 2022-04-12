@@ -10,8 +10,19 @@ public:
    LinkedList();
    ~LinkedList();
 
+   void addBack(Tile* node);
+   void addFront(Tile* node);
+   Node* getHead();
+   int getSize();
+   Node* getNode(int i);
+   bool checkEmpty();
+   void removeNode(int i);
+   void printList();
+
 private:
    Node* head;
+   Node* tail;
+   int size;
 };
 
 #endif // ASSIGN2_LINKEDLIST_H

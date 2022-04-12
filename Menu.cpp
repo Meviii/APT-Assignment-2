@@ -41,6 +41,7 @@ void Menu::runChoice(){
     }else if(this->choice == 2) {
 
     }else if(this->choice == 3) {
+        this->printCredits();
 
     }else if(this->choice == 4){
         std::cout << "Goodbye!" << std::endl;
@@ -51,4 +52,11 @@ void Menu::runChoice(){
         this->choice = 0;
         std::cout << "Invalid Input" << std::endl;
     }
+}
+
+void Menu::printCredits(){
+    std::cout << "Name: Mevlut Saluk" << std::endl;
+    std::cout << "Student ID: S3717696" << std::endl;
+    std::cout << "Email: S3717696@rmit.edu.com.au" << std::endl;
+    std::cout << std::endl;
 }

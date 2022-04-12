@@ -12,7 +12,7 @@ class Menu {
         void runMenu();
         void printMenu();
         void runChoice();
-        
+        void printCredits();
     private:
         int choice;
 };

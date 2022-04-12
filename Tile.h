@@ -9,9 +9,17 @@ typedef char Letter;
 typedef int Value;
 
 class Tile {
-public:
-   Letter letter;
-   Value  value;
+   public:
+      Letter letter;
+      Value  value;
+      Tile(Letter letter, Value value);
+      Tile();
+      
+      Letter getLetter();
+      Value  getValue();
+      
+   private:
+
 };
 
 #endif // ASSIGN2_TILE_H

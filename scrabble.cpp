@@ -15,6 +15,6 @@ int main(int argc, char* args[]) {
    Menu* menu = new Menu();
    menu->runMenu();
 
-   std::cout << "End of program" << std::endl;
+
    return EXIT_SUCCESS;
 }

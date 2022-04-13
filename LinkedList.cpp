@@ -62,10 +62,10 @@ void LinkedList::removeBack(){
 
 Node* LinkedList::getNode(int i){
    int counter = 0;
-   Node* tmp = head;
+   Node* node = head;
    if (i >= 0 && i <= size){
-      while (counter != i && tmp != nullptr){
-         tmp = tmp->next;
+      while (counter != i && node != nullptr){
+         node = node->next;
          counter++;
       }
    }else{
@@ -74,7 +74,7 @@ Node* LinkedList::getNode(int i){
       return t;
    }
 
-   return tmp;
+   return node;
 }
 
 Tile* LinkedList::getNodeAsTile(int i){
@@ -115,7 +115,7 @@ void LinkedList::removeNode(int i){
    }else if (i > 0 && i < size){
       Node* n = getNode(i-1);
       Node* n1 = getNode(i+1);
-      n-> next = n1;
+      n->next = n1;
       size++;
    }else if (i == size){
       this->tail = nullptr;

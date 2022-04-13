@@ -108,6 +108,7 @@ void LinkedList::removeNode(int i){
       }else{
          Node* tmp = head;
          head = head->next;
+         size--;
          delete tmp;
          return;
       }

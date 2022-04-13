@@ -17,7 +17,9 @@ public:
    Node* getNode(int i);
    bool checkEmpty();
    void removeNode(int i);
+   void removeBack();
    void printList();
+   Tile* getNodeAsTile(int i);
 
 private:
    Node* head;

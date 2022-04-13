@@ -39,7 +39,6 @@ void Menu::printMenu(){
 
 void Menu::runChoice(){
     int player_count;
-
     if(this->choice == 1) {
         Player* player_1 = new Player();
         Player* player_2 = new Player();
@@ -65,8 +64,8 @@ void Menu::runChoice(){
         player_2->setName(players[1]);
 
         std::cout << "Let's Play!" << std::endl;
-
     }else if(this->choice == 2) {
+        std::cout << "Option 2 chosen" << std::endl;
 
     }else if(this->choice == 3) {
         this->printCredits();

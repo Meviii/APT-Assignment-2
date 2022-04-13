@@ -5,7 +5,6 @@
 #include <string>
 
 int main(void){
-
     LinkedList* ll = new LinkedList;
     Tile* tl1 = new Tile('A',1);
     Tile* tl2 = new Tile('B',1);
@@ -19,10 +18,11 @@ int main(void){
 
     ll->addBack(tl2);
     ll->addFront(tl1);
-    ll->addFront(tl3);
+    ll->addBack(tl3);
     ll->printList();
+    Tile* tl4 = new Tile(ll->getNodeAsTile(1)->getLetter(), ll->getNodeAsTile(1)->getValue());
+    ll->addBack(tl4);
     std::cout << std::endl;
-    ll->removeNode(0);
     ll->printList();
 
 

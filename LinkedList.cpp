@@ -56,8 +56,11 @@ void LinkedList::addFront(Tile* node){
    size++;
 }
 
-Node *LinkedList::getNode(int i)
-{
+void LinkedList::removeBack(){
+   this->removeNode(size);
+}
+
+Node* LinkedList::getNode(int i){
    int counter = 0;
    Node* tmp = head;
    if (i >= 0 && i <= size){
@@ -72,6 +75,24 @@ Node *LinkedList::getNode(int i)
    }
 
    return tmp;
+}
+
+Tile* LinkedList::getNodeAsTile(int i){
+   int counter = 0;
+   Node* cur = head;
+   Tile* ret = nullptr;
+
+   if (i >= 0 && i <= size){
+      while (counter != i && cur != nullptr){
+         cur = cur->next;
+         counter++;
+      }
+   }else{
+      std::cout << "Node not in range" << std::endl;
+      return ret;
+   }
+   ret = new Tile(cur->tile->getLetter(), cur->tile->getValue());
+   return ret;
 }
 
 

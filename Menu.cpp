@@ -17,13 +17,18 @@ Menu::~Menu(){}
 void Menu::runMenu(){
     this->choice = 0;
 
-    if (this->choice <= 4 && std::cin.eof() != true) {
+    while (this->choice <= 4 && std::cin.eof() != true) {
         this->printMenu();
         std::cout << "> ";
         std::cin >> this->choice;
         std::cin.clear();
+        std::cin.ignore(10000,'\n');
         this->runChoice();
     }
+    // else if (std::cin.eof()) {
+    //     std::cout << "Goodbye" << std::endl;
+    //     return;
+    // }
 }
 
 void Menu::printMenu(){
@@ -38,32 +43,9 @@ void Menu::printMenu(){
 }
 
 void Menu::runChoice(){
-    int player_count;
+
     if(this->choice == 1) {
-        Player* player_1 = new Player();
-        Player* player_2 = new Player();
-        std::cout << std::endl<< "Starting a New Game" << std::endl;
-        std::cout << "Player count? 2-4" << std::endl;
-        std::cout << "> ";
-        std::cin >> player_count;
-        if (player_count >= 2 && player_count <= 4){
-            if (player_count == 2 && this->isTwoPlayer() == true){
-                this->playerSelection(player_count);
-            }else{
-                std::cout << "Currently support 2-player only.";
-                std::cout << std::endl;
-                this->runChoice();
-            }
-        }else{
-            std::cout << "Player amount is only 2-4";
-            std::cout << std::endl;
-            this->runChoice();
-        }
-
-        player_1->setName(players[0]);
-        player_2->setName(players[1]);
-
-        std::cout << "Let's Play!" << std::endl;
+        this->playerCheck();
     }else if(this->choice == 2) {
         std::cout << "Option 2 chosen" << std::endl;
 
@@ -73,8 +55,9 @@ void Menu::runChoice(){
     }else if(this->choice == 4){
         std::cout << "Goodbye!" << std::endl;
         this->choice = 4;
-    }else if(std::cin.eof()) {
-        
+
+    }else if(std::cin.eof() == true) {
+        std::cout << "Goodbye!" << std::endl;
     }else {
         this->choice = 0;
         std::cout << "Invalid Input" << std::endl;
@@ -86,6 +69,34 @@ void Menu::printCredits(){
     std::cout << "Student ID: S3717696" << std::endl;
     std::cout << "Email: S3717696@rmit.edu.com.au" << std::endl;
     std::cout << std::endl;
+}
+
+
+void Menu::playerCheck(){
+    int player_count;
+
+    Player* player_1 = new Player();
+    Player* player_2 = new Player();
+    std::cout << std::endl<< "Starting a New Game" << std::endl;
+    std::cout << "Player count? 2-4" << std::endl;
+    std::cout << "> ";
+    std::cin >> player_count;
+    if (player_count >= 2 && player_count <= 4){
+        if (player_count == 2 && this->isTwoPlayer() == true){
+            this->playerSelection(player_count);
+        }else if (player_count > 2 && this->isTwoPlayer() == true){
+            std::cout << "Currently support 2-player only." << std::endl;
+            this->runChoice();
+        }
+    }else{
+        this->choice = 1;
+        this->runMenu();
+    }
+
+    player_1->setName(players[0]);
+    player_2->setName(players[1]);
+
+    std::cout << "Let's Play!" << std::endl;
 }
 
 void Menu::playerSelection(int i){

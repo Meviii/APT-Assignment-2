@@ -17,6 +17,7 @@ class Menu {
         void runChoice();
         void printCredits();
         void playerSelection(int i);
+        void playerCheck();
         bool isTwoPlayer();
 
     private:

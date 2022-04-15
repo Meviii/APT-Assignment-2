@@ -5,7 +5,11 @@
 GameBoard::GameBoard(){
     gameRow.assign(BOARD_SIZE, nullptr);
     board.assign(BOARD_SIZE, gameRow);
-    
+
+    Tile* init = new Tile(' ', 0);
+    Tile* init2 = new Tile(' ', 0);
+    this->addTile(0,0,init);
+    this->addTile(14,14,init2);
 }
 
 std::vector<std::vector<Tile*>> GameBoard::getBoard(){
@@ -50,30 +54,13 @@ void GameBoard::printBoard(){
 }
 
 bool GameBoard::isTileValid(int row, int col){
-    return row < BOARD_SIZE && col < BOARD_SIZE && board[row][col] == NULL;
+    return row < BOARD_SIZE && col < BOARD_SIZE && (board[row][col] == NULL || board[row][col]->getLetter() == ' ');
 }
 
-// for (int row = 0; row < (this->getSize()); row++){
-//         for (int col = 0; col < (this->getSize()); col++){
-//             if (board[row][col] == NULL){
-//                 if (board[0][col]){
-//                     std::cout << alpha[row] << " |   ";
-//                 }
-//                 // else if (board[14][col]){
-//                 //     std::cout << "|   |";
-//                 // }
-//                 // else if (!board[0][row]){
-//                 //     std::cout << "|   ";
-//                 // }
-//             }else if (board[row][col] != NULL){
-//                 if (board[0][col]){
-//                     std::cout << alpha[row] << " | " << board[row][col]->getLetter() << " ";
-//                 }else if (board[14][col]){
-//                     std::cout << "| " << board[row][col]->getLetter() << " |";
-//                 }else if (!board[0][row]){
-//                     std::cout << "| " << board[row][col]->getLetter() << " ";
-//                 }
-//             }
-//         }
-//         std::cout << std::endl;
-//     }
+bool GameBoard::isGameOver(TileBag* tb, std::vector<Player*> players){
+    return 0;
+}
+
+void GameBoard::checkWinner(std::vector<Player*> players){
+    return;
+}

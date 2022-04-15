@@ -2,10 +2,16 @@
 #define MENU_H
 
 #include "Player.h"
+#include "GameBoard.h"
+#include "LinkedList.h"
+#include "Tile.h"
+#include "TileBag.h"
+#include "Node.h"
 
 #include <iostream>
 #include <string>
 #include <vector>
+
 
 class Menu {
     public:
@@ -18,11 +24,13 @@ class Menu {
         void printCredits();
         void playerSelection(int i);
         void playerCheck();
+        void newGame();
+
         bool isTwoPlayer();
 
     private:
         int choice;
-        std::vector<std::string> players;
+        std::vector<Player*> players;
 };
 
 #endif // MENU_H

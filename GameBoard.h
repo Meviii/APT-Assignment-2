@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <array>
 
 #include "LinkedList.h"
 
@@ -15,13 +16,12 @@ class GameBoard {
         void printBoard();
         void addTile(int row, int col, Tile* tile);
         int getSize();
+        bool isTileValid(int row, int col);
 
     private:
 
         std::vector<Tile*> gameRow;
         std::vector<std::vector<Tile*>> board;
-        std::vector<char> rows;
-        std::vector<int> cols;
 };
 
 #endif // GAMEBOARD_H

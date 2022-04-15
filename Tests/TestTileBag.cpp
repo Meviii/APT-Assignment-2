@@ -3,7 +3,10 @@
 #include "../TileBag.h"
 
 #include <iostream>
-#include <string>
+#include <random>
+#include <fstream>
+
+void printList(TileBag* tb);
 
 int main(void){
     
@@ -17,25 +20,17 @@ int main(void){
     tb->addBack(tl1);
     tb->addBack(tl2);
     tb->addBack(tl3);
-    std::cout << tb->getSize() << std::endl;
 
-    for (int i = 0; i < tb->getSize(); i++){
-        std::cout << tb->getTile(i)->getLetter();
-        std::cout << ", ";
-        std::cout << tb->getTile(i)->getValue();
-        std::cout << std::endl;
-    }
-
-    std::cout << std::endl;
-
-    tb->removeFront();
-    std::cout << tb->getSize() << std::endl;
-    for (int i = 0; i < tb->getSize(); i++){
-        std::cout << tb->getTile(i)->getLetter();
-        std::cout << ", ";
-        std::cout << tb->getTile(i)->getValue();
-        std::cout << std::endl;
-    }
+    //printList(tb);
 
     return 0;
+}
+
+void printList(TileBag* tb){
+    for (int i = 0; i < tb->getSize(); i++){
+        std::cout << tb->getTile(i)->getLetter();
+        std::cout << ", ";
+        std::cout << tb->getTile(i)->getValue();
+        std::cout << std::endl;
+    }
 }

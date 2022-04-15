@@ -2,7 +2,6 @@
 #include "LinkedList.h"
 
 #include <iostream>
-#include <string>
 
 LinkedList::LinkedList() {
    head = nullptr;
@@ -122,7 +121,6 @@ void LinkedList::removeNode(int i){
    }
    size--;
 }
-
 
 void LinkedList::printList(){
    std::cout << "Linked List with tile size: " << size << std::endl;

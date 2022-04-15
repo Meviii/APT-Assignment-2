@@ -4,7 +4,7 @@
 #include "LinkedList.h"
 #include "Tile.h"
 
-#include <String>
+#define TILE_MAX    98
 
 class TileBag{
     public:
@@ -18,7 +18,7 @@ class TileBag{
         void addBack(Tile* tile);
         void setAsList(LinkedList* tile_list);
         LinkedList* getList();
-
+        
         void remove(int i);
         void removeFront();
         void removeBack();
@@ -26,7 +26,7 @@ class TileBag{
 
     private:
         LinkedList* tile_list;
-        int size;
+        void shuffle();
 };
 
 #endif // ASSIGN2_TILEBAG_H

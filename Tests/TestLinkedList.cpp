@@ -30,5 +30,6 @@ int main(void){
     std::cout << ll->getHead()->tile->getLetter() << ", " << ll->getHead()->tile->getValue() << std::endl;
     size = ll->getSize()-1;
     std::cout << ll->getNode(size)->tile->getLetter() << ", " << ll->getNode(size)->tile->getValue() << std::endl;
+    std::cout << "Is empty? " << ll->checkEmpty() << std::endl;
 }
 

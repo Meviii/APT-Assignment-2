@@ -13,15 +13,16 @@ int main(void){
     LinkedList* list = new LinkedList();
     TileBag* tb = new TileBag(list);
 
-    Tile* tl1 = new Tile('A', 1);
-    Tile* tl2 = new Tile('B', 1);
-    Tile* tl3 = new Tile('C', 1);
+    // Tile* tl1 = new Tile('A', 1);
+    // Tile* tl2 = new Tile('B', 1);
+    // Tile* tl3 = new Tile('C', 1);
 
-    tb->addBack(tl1);
-    tb->addBack(tl2);
-    tb->addBack(tl3);
+    // tb->addBack(tl1);
+    // tb->addBack(tl2);
+    // tb->addBack(tl3);
 
-    //printList(tb);
+    //tb->readFile();
+    printList(tb);
 
     return 0;
 }

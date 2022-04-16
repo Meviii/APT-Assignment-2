@@ -11,7 +11,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <sstream>
+#include <map>
 
 class Menu {
     public:
@@ -25,9 +26,10 @@ class Menu {
         void playerSelection(int i);
         void playerCheck();
         void newGame();
-
+        std::vector<std::string> argTokenizer(std::string input);
+        int argCounter(std::string input);
         bool isTwoPlayer();
-
+        
     private:
         int choice;
         std::vector<Player*> players;

@@ -3,8 +3,11 @@
 
 #include "Tile.h"
 #include "LinkedList.h"
+#include "TileBag.h"
 
-#include <String>
+#include <vector>
+
+#define PLAYER_HAND_AMOUNT     7
 
 class Player{
     public:
@@ -16,8 +19,13 @@ class Player{
 
         std::string getName();
         void setName(std::string name);
+        void assignHand(std::vector<Tile*> player_hand, TileBag* tb);
+        std::vector<Tile*> getHand();
+        void printHand();
+        bool isTileInHand(Tile* tile);
 
     private:
+        std::vector<Tile*> _player_hand;
         std::string name;
         int score;
 };

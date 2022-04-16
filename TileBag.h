@@ -4,6 +4,11 @@
 #include "LinkedList.h"
 #include "Tile.h"
 
+#include <fstream>
+#include <iostream>
+#include <random>
+#include <sstream>
+
 #define TILE_MAX    98
 
 class TileBag{
@@ -23,10 +28,12 @@ class TileBag{
         void removeFront();
         void removeBack();
         int getSize();
-
+        
+        void readFile();
     private:
         LinkedList* tile_list;
         void shuffle();
+        //void readFile();
 };
 
 #endif // ASSIGN2_TILEBAG_H

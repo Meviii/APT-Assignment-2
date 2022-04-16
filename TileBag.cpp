@@ -1,15 +1,12 @@
 #include "TileBag.h"
 
-#include <random>
-#include <fstream>
-#include <iostream>
-
 TileBag::TileBag(){
     this->tile_list = nullptr;
 }
 
 TileBag::TileBag(LinkedList* tile_list){
     this->tile_list = tile_list;
+    this->readFile();
 }
 
 TileBag::~TileBag(){
@@ -52,3 +49,24 @@ void TileBag::removeBack(){
     tile_list->removeBack();
 }
 
+void TileBag::readFile(){
+    std::ifstream file;
+    std::string line;
+    std::istringstream iss_line(line);
+    std::string letter;
+    std::string value;
+    file.open("ScrabbleTiles.txt");
+    if (!file.is_open()){
+        std::cout << "Error while trying to open file" << std::endl;
+    }else{
+        while (std::getline(file, line)) {
+            letter = line.substr(0,1);
+            value = line.substr(1,-1);
+            int num = std::stoi(value);
+            char c = letter[0];
+            Tile* tmp = new Tile((Letter) c,(Value) num);
+            this->addBack(tmp);
+            tmp = nullptr;
+        }
+    }
+}

@@ -22,13 +22,11 @@ void Menu::runMenu(){
         std::cout << "> ";
         std::cin >> this->choice;
         std::cin.clear();
-        std::cin.ignore(10000,'\n');
         this->runChoice();
+    }else if (std::cin.eof()) {
+        std::cout << "Goodbye" << std::endl;
+        return;
     }
-    // else if (std::cin.eof()) {
-    //     std::cout << "Goodbye" << std::endl;
-    //     return;
-    // }
 }
 
 void Menu::printMenu(){
@@ -132,22 +130,96 @@ void Menu::newGame(){
     std::cout << "Player 1: " << player_1->getName() << std::endl;
     std::cout << "Player 2: " << player_2->getName() << std::endl;
 
-    GameBoard* gm = new GameBoard(); // New Gameboard
-    //TileBag* tb = new TileBag(); // New TileBag, Shuffled
+    GameBoard* gb = new GameBoard(); // New Gameboard
+    LinkedList* list = new LinkedList(); // LinkedList initialization on TileBag
+    TileBag* tb = new TileBag(list); // New TileBag, Shuffled
 
-    // tilebag(7 tiles) -> player_hands // Player hand assigning, 7 tiles
+    std::vector<Tile*> player_1_hand; // initialize player hand
+    std::vector<Tile*> player_2_hand; // initialize player hand
 
-    //std::vector<Tile*> player_1_hand; // Player initial hand
-    //std::vector<Tile*> player_2_hand; // Player initial hand
+    player_1->assignHand(player_1_hand, tb); // player hand
+    player_2->assignHand(player_2_hand, tb); // player hand
 
-    std::string pl1_name = player_1->getName(); 
-    std::string pl2_name = player_2->getName(); 
+    std::string pl1_name = player_1->getName();
+    std::string pl2_name = player_2->getName();
 
-    gm->printBoard(); // Print initial board
+    std::cout << "Player 1 starts first." << std::endl;
+    while (!gb->isGameOver(tb, players) && !std::cin.eof()){
 
-    std::cout << pl1_name << ", you start." << std::endl;
+        std::cout << pl1_name << ", it's your turn" << std::endl;
 
-    // while (!gm->isGameOver()){ 
-    //     return;
-    // }
+        std::cout << "Score for " << player_1->getName() << ": " << player_1->getScore() << std::endl;
+        std::cout << "Score for " << player_2->getName() << ": " << player_1->getScore() << std::endl;
+
+        gb->printBoard();
+
+        player_1->printHand();
+
+        std::string input;
+        while (input != "place Done"){
+            std::cout << "> ";
+            std::string cin1;
+            std::string cin2;
+            std::string cin3;
+            std::string cin4;
+
+            std::cin >> cin1;
+            std::cin >> cin2;
+            std::cin >> cin3;
+            std::cin >> cin4;
+            
+            input = (cin1 + " " + cin2 + " " + cin3 + " " + cin4);
+
+            if (input.substr(0,5) == "place"){
+                if (this->argCounter(input) == 4){
+                    std::vector<std::string> s = this->argTokenizer(input);
+
+                    std::string arg = s[0];
+                    std::string tile_letter_to_remove = s[1];
+                    Letter letter_to_place = s[3][0];
+                    Value boardColumn = std::stoi(s[3].substr(1,2));
+                    //Value val = (this->valueByLetter(letter_to_place));
+
+                    Tile* curr_tile = new Tile(letter_to_place, boardColumn);
+
+                    int letter_to_row = gb->boardRow.find(letter_to_place)->second; // row representation of the board letter
+                    
+                    if (gb->isTileValid(letter_to_row, curr_tile->getValue())){
+                        gb->addTile(letter_to_row, curr_tile->getValue(), curr_tile);
+                        std::cout << "Added tile to " << letter_to_place << boardColumn << std::endl;
+                        gb->printBoard();
+                    }
+                    return;
+                }else{
+                    std::cout << "Invalid Arguments" << std::endl;
+                    return;
+                }
+            }else{
+                std::cout << "Incorrect input";
+                std::cin.clear();
+                return;
+            }
+        } 
+
+    }
+}
+
+std::vector<std::string> Menu::argTokenizer(std::string input){
+    std::stringstream ss(input);
+    std::vector<std::string> s;
+
+    while (ss >> input) {
+        s.push_back(input);
+    }
+    return s;
+}
+
+int Menu::argCounter(std::string input){
+    std::stringstream ss(input);
+    int count = 0;
+
+    while (ss >> input) {
+        count += 1;
+    }
+    return count;
 }

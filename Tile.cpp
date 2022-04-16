@@ -1,7 +1,5 @@
 #include "Tile.h"
 
-#include <iostream>
-
 Tile::Tile(Letter letter, Value value){
     this->letter = letter;
     this->value = value;
@@ -15,4 +13,8 @@ Letter Tile::getLetter(){
 
 Value Tile::getValue(){
     return this->value;
+}
+
+int Tile::valueByLetter(Letter letter){
+    return letterValue.find(letter)->second;
 }

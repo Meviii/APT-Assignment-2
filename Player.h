@@ -12,22 +12,23 @@
 class Player{
     public:
         Player();
-        Player(std::string name);
+        Player(std::string name, LinkedList* hand);
 
         int getScore();
         void setScore(int Score);
 
         std::string getName();
         void setName(std::string name);
-        void assignHand(std::vector<Tile*> player_hand, TileBag* tb);
-        std::vector<Tile*> getHand();
+        LinkedList* getHand();
+        void setHand(TileBag* tb);
         void printHand();
         bool isTileInHand(Tile* tile);
+        Tile* getTileInHand(Letter letter);
 
     private:
-        std::vector<Tile*> _player_hand;
         std::string name;
         int score;
+        LinkedList* hand;
 };
 
 #endif // ASSIGN2_PLAYER_H

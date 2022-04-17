@@ -1,12 +1,13 @@
 #include "Player.h"
 
 Player::Player(){
-    
+    hand = new LinkedList();
 }
 
-Player::Player(std::string name){
+Player::Player(std::string name, LinkedList* tile_hand){
     this->name = name;
     this->score = 0;
+    this->hand = tile_hand;
 }
 
 int Player::getScore(){
@@ -25,36 +26,47 @@ void Player::setName(std::string name){
     this->name = name;
 }
 
-void Player::assignHand(std::vector<Tile*> player_hand, TileBag* tb){
+void Player::setHand(TileBag* tb){
     for(int i = 0; i < PLAYER_HAND_AMOUNT; i++){
-        _player_hand.push_back(tb->getFront());
-        player_hand.push_back(tb->getFront());
+        this->hand->addBack(tb->getFront());
         tb->removeFront();
     }
+    return;
 }
 
-std::vector<Tile*> Player::getHand(){
-    return _player_hand;
+LinkedList* Player::getHand(){
+    return hand;
 }
 
 void Player::printHand(){
     std::cout << "Your hand is: " << std::endl;
+
+    Node* h = hand->getHead();
     for (int i = 0; i < PLAYER_HAND_AMOUNT; i++){
         if (i == (PLAYER_HAND_AMOUNT-1)){
-            std::cout << _player_hand[i]->getLetter() << "-" << _player_hand[i]->getValue();
+            std::cout << h->tile->getLetter() << "-" << h->tile->getValue();
         }else{
-            std::cout << _player_hand[i]->getLetter() << "-" << _player_hand[i]->getValue() << ", ";
+            std::cout << h->tile->getLetter() << "-" << h->tile->getValue() << ", ";
         }
+        h = h->next;
     }
     std::cout << std::endl;
 }
 
-bool Player::isTileInHand(Tile* tile){
-    int size = _player_hand.size();
-    for (int i = 0; i < size; i++){
-        if (tile == _player_hand[i]){
-            return true;
+Tile* Player::getTileInHand(Letter letter){
+    Node* h = this->hand->getHead();
+    Tile* toRet;
+    while (h != nullptr){
+        if (h->tile->getLetter() == letter){
+            toRet = new Tile(h->tile->getLetter(), h->tile->getValue());
+            return toRet;
+        }else{
+            h = h->next;
         }
     }
+    return 0;
+}
+
+bool Player::isTileInHand(Tile* tile){
     return false;
 }

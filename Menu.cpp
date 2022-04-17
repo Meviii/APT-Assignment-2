@@ -105,7 +105,8 @@ void Menu::playerSelection(int i){
         std::cout << "Enter a name for player " << x << " (uppercase characters only): " << std::endl;
         std::cout << "> ";
         std::cin >> player_name;
-        Player* tmp_p = new Player(player_name);
+        Player* tmp_p = new Player();
+        tmp_p->setName(player_name);
         players.push_back(tmp_p);
         std::cout << "Player" << x << " name set to: " << player_name << std::endl;
         std::cin.clear();
@@ -118,90 +119,22 @@ bool Menu::isTwoPlayer(){
 
 void Menu::newGame(){
     // Player initializing
-    Player* player_1;
-    Player* player_2;
-
     std::cout << "Let's Play!" << std::endl;
     std::cout << std::endl;
 
-    player_1 = players[0];
-    player_2 = players[1];
+    LinkedList* list = new LinkedList();
+    TileBag* tb = new TileBag(list);
+    GameBoard* gb = new GameBoard();
 
-    std::cout << "Player 1: " << player_1->getName() << std::endl;
-    std::cout << "Player 2: " << player_2->getName() << std::endl;
-
-    GameBoard* gb = new GameBoard(); // New Gameboard
-    LinkedList* list = new LinkedList(); // LinkedList initialization on TileBag
-    TileBag* tb = new TileBag(list); // New TileBag, Shuffled
-
-    std::vector<Tile*> player_1_hand; // initialize player hand
-    std::vector<Tile*> player_2_hand; // initialize player hand
-
-    player_1->assignHand(player_1_hand, tb); // player hand
-    player_2->assignHand(player_2_hand, tb); // player hand
-
-    std::string pl1_name = player_1->getName();
-    std::string pl2_name = player_2->getName();
-
-    std::cout << "Player 1 starts first." << std::endl;
-    while (!gb->isGameOver(tb, players) && !std::cin.eof()){
-
-        std::cout << pl1_name << ", it's your turn" << std::endl;
-
-        std::cout << "Score for " << player_1->getName() << ": " << player_1->getScore() << std::endl;
-        std::cout << "Score for " << player_2->getName() << ": " << player_1->getScore() << std::endl;
-
-        gb->printBoard();
-
-        player_1->printHand();
-
-        std::string input;
-        while (input != "place Done"){
-            std::cout << "> ";
-            std::string cin1;
-            std::string cin2;
-            std::string cin3;
-            std::string cin4;
-
-            std::cin >> cin1;
-            std::cin >> cin2;
-            std::cin >> cin3;
-            std::cin >> cin4;
-            
-            input = (cin1 + " " + cin2 + " " + cin3 + " " + cin4);
-
-            if (input.substr(0,5) == "place"){
-                if (this->argCounter(input) == 4){
-                    std::vector<std::string> s = this->argTokenizer(input);
-
-                    std::string arg = s[0];
-                    std::string tile_letter_to_remove = s[1];
-                    Letter letter_to_place = s[3][0];
-                    Value boardColumn = std::stoi(s[3].substr(1,2));
-                    //Value val = (this->valueByLetter(letter_to_place));
-
-                    Tile* curr_tile = new Tile(letter_to_place, boardColumn);
-
-                    int letter_to_row = gb->boardRow.find(letter_to_place)->second; // row representation of the board letter
-                    
-                    if (gb->isTileValid(letter_to_row, curr_tile->getValue())){
-                        gb->addTile(letter_to_row, curr_tile->getValue(), curr_tile);
-                        std::cout << "Added tile to " << letter_to_place << boardColumn << std::endl;
-                        gb->printBoard();
-                    }
-                    return;
-                }else{
-                    std::cout << "Invalid Arguments" << std::endl;
-                    return;
-                }
-            }else{
-                std::cout << "Incorrect input";
-                std::cin.clear();
-                return;
-            }
-        } 
-
+    for (Player* p : players){
+        p->setHand(tb);
+        p->printHand();
     }
+    
+    std::cout << "Player 1 starts first." << std::endl;
+
+    GameEngine* ge = new GameEngine(tb, players, gb);
+    ge->gamePlay();
 }
 
 std::vector<std::string> Menu::argTokenizer(std::string input){

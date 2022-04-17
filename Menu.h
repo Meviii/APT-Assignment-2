@@ -7,6 +7,7 @@
 #include "Tile.h"
 #include "TileBag.h"
 #include "Node.h"
+#include "GameEngine.h"
 
 #include <iostream>
 #include <string>

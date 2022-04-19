@@ -8,6 +8,8 @@
 #include <iostream>
 #include <random>
 #include <sstream>
+#include <random>
+#include <time.h>
 
 #define TILE_MAX    98
 
@@ -28,12 +30,12 @@ class TileBag{
         void removeFront();
         void removeBack();
         int getSize();
-        
-        void readFile();
+        void shuffle();
+
     private:
         LinkedList* tile_list;
-        void shuffle();
-        //void readFile();
+        //void shuffle();
+        void readFile();
 };
 
 #endif // ASSIGN2_TILEBAG_H

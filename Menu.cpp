@@ -26,6 +26,8 @@ void Menu::runMenu(){
     }else if (std::cin.eof()) {
         std::cout << "Goodbye" << std::endl;
         return;
+    }else{
+        std::cout << "Incorrect Input" << std::endl;
     }
 }
 
@@ -57,8 +59,8 @@ void Menu::runChoice(){
     }else if(std::cin.eof() == true) {
         std::cout << "Goodbye!" << std::endl;
     }else {
-        this->choice = 0;
         std::cout << "Invalid Input" << std::endl;
+        return this->runMenu(); // needs ot be fixed
     }
 }
 
@@ -102,15 +104,24 @@ void Menu::playerSelection(int i){
             std::cout << "Reached max player limit of 4" << std::endl;
             return;
         }
-        std::cout << "Enter a name for player " << x << " (uppercase characters only): " << std::endl;
+        std::cout << "Enter a name for player " << x << ": " << std::endl;
         std::cout << "> ";
         std::cin >> player_name;
+
+        while(std::cin.fail() || player_name.find_first_of("0123456789") != std::string::npos){
+            std::cin.clear();
+            std::cin.ignore();
+            std::cout << "Please enter a valid name." << std::endl;
+            std::cin >> player_name;
+        }
         Player* tmp_p = new Player();
         tmp_p->setName(player_name);
+        tmp_p->setScore(0);
         players.push_back(tmp_p);
         std::cout << "Player" << x << " name set to: " << player_name << std::endl;
         std::cin.clear();
     }
+    std::cout << std::endl;
 }
 
 bool Menu::isTwoPlayer(){
@@ -125,34 +136,9 @@ void Menu::newGame(){
     LinkedList* list = new LinkedList();
     TileBag* tb = new TileBag(list);
     GameBoard* gb = new GameBoard();
-
-    for (Player* p : players){
-        p->setHand(tb);
-        p->printHand();
-    }
     
     std::cout << "Player 1 starts first." << std::endl;
-
+    std::cout << std::endl;
     GameEngine* ge = new GameEngine(tb, players, gb);
     ge->gamePlay();
-}
-
-std::vector<std::string> Menu::argTokenizer(std::string input){
-    std::stringstream ss(input);
-    std::vector<std::string> s;
-
-    while (ss >> input) {
-        s.push_back(input);
-    }
-    return s;
-}
-
-int Menu::argCounter(std::string input){
-    std::stringstream ss(input);
-    int count = 0;
-
-    while (ss >> input) {
-        count += 1;
-    }
-    return count;
 }

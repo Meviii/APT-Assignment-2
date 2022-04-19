@@ -22,8 +22,12 @@ class Player{
         LinkedList* getHand();
         void setHand(TileBag* tb);
         void printHand();
-        bool isTileInHand(Tile* tile);
+        bool isTileInHand(Letter letter);
         Tile* getTileInHand(Letter letter);
+        void removeTileInHand(Letter letter);
+
+        bool canDrawTile(TileBag* tb);
+        void drawTile(TileBag* tb);
 
     private:
         std::string name;

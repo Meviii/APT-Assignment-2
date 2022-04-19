@@ -14,7 +14,7 @@ int Player::getScore(){
     return score;
 }
 
-void Player::setScore(int Score){
+void Player::setScore(int score){
     this->score = score;
 }
 
@@ -67,6 +67,44 @@ Tile* Player::getTileInHand(Letter letter){
     return 0;
 }
 
-bool Player::isTileInHand(Tile* tile){
+bool Player::isTileInHand(Letter letter){
+    Node* h = this->hand->getHead();
+
+    while (h != nullptr){
+        if (h->tile->getLetter() == letter){
+            return true;
+        }else{
+            h = h->next;
+        }
+    }
     return false;
+}
+
+void Player::removeTileInHand(Letter letter){
+
+    Node* h = this->hand->getHead();
+    int count = 0;
+    while (h != nullptr){
+        if (h->tile->getLetter() == letter){
+            hand->removeNode(count);
+            return;
+        }else{
+            count += 1;
+            h = h->next;
+        }
+    }
+    return;
+}
+
+bool Player::canDrawTile(TileBag* tb){
+    if (tb->getSize() > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+void Player::drawTile(TileBag* tb){
+    hand->addBack(tb->getFront());
+    tb->removeFront();
 }

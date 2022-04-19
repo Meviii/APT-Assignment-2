@@ -118,6 +118,9 @@ void LinkedList::removeNode(int i){
       size++;
    }else if (i == size){
       this->tail = nullptr;
+   }else{
+      std::cout << "not in range" << std::endl;
+      return;
    }
    size--;
 }

@@ -19,7 +19,6 @@ class GameBoard {
         void addTile(int row, int col, Tile* tile);
         int getSize();
         bool isTileValid(int row, int col);
-        bool isGameOver(TileBag* tb, std::vector<Player*> players);
         void checkWinner(std::vector<Player*> players);
         void removeTile(int row, int col, Tile* tile);
         std::map<char, int> boardRow = {{'A', 0}, {'B', 1}, {'C', 2}, {'D', 3}, {'E', 4}, {'F', 5}, {'G', 6},

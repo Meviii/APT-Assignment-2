@@ -14,7 +14,3 @@ Letter Tile::getLetter(){
 Value Tile::getValue(){
     return this->value;
 }
-
-int Tile::valueByLetter(Letter letter){
-    return letterValue.find(letter)->second;
-}

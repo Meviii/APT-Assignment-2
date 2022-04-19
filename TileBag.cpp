@@ -7,11 +7,10 @@ TileBag::TileBag(){
 TileBag::TileBag(LinkedList* tile_list){
     this->tile_list = tile_list;
     this->readFile();
+    shuffle();
 }
 
-TileBag::~TileBag(){
-
-}
+TileBag::~TileBag(){}
 
 void TileBag::setAsList(LinkedList* tile_list){
     this->tile_list = tile_list;
@@ -47,6 +46,20 @@ void TileBag::removeFront(){
 
 void TileBag::removeBack(){
     tile_list->removeBack();
+}
+
+void TileBag::shuffle(){
+    LinkedList* lst = new LinkedList();
+    Tile* curr_tile;
+
+    int size = (tile_list->getSize());
+    srand(time(0));
+    for (int j = 0; j <= size; j++){
+        int i = rand() % size;
+        curr_tile = new Tile(tile_list->getNodeAsTile(i)->getLetter(), tile_list->getNodeAsTile(i)->getValue());
+        lst->addBack(curr_tile);
+    } 
+    this->tile_list = lst;
 }
 
 void TileBag::readFile(){

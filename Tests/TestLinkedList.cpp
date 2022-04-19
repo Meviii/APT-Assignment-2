@@ -22,6 +22,8 @@ int main(void){
     ll->addFront(tl1);
     ll->addBack(tl3);
     ll->printList();
+    ll->removeNode(2);
+    ll->printList();
     Tile* tl4 = new Tile(ll->getNodeAsTile(1)->getLetter(), ll->getNodeAsTile(1)->getValue());
     ll->addFront(tl4);
     std::cout << std::endl;

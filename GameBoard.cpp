@@ -6,14 +6,6 @@ GameBoard::GameBoard(){
     gameRow.assign(BOARD_SIZE, nullptr);
     board.assign(BOARD_SIZE, gameRow);
 
-    // Tile* init = new Tile(' ', 0);
-    // Tile* init1 = new Tile(' ', 0);
-    // Tile* init2 = new Tile(' ', 0);
-
-    // this->addTile(0,0,init);
-    // this->addTile(14,14,init2);
-    // this->addTile(14,0,init1);
-
     for (int row = 0; row < (this->getSize()); row++){
         for (int col = 0; col < (this->getSize()); col++){
             Tile* tmp = new Tile(' ',0);
@@ -60,8 +52,4 @@ bool GameBoard::isTileValid(int row, int col){ // Area checks, open tile check
 
 void GameBoard::checkWinner(std::vector<Player*> players){
     return;
-}
-
-void GameBoard::removeTile(int row, int col, Tile* tile){
-
 }

@@ -22,13 +22,14 @@ class GameEngine {
         void gamePlay();
         int valueByLetter(Letter letter);
         std::vector<std::string> argTokenizer(std::string input);
-        int argCounter(std::string input);
         void placeTile(std::string input);
         void changePlayer();
         void replaceTile(std::string input);
-        void checkGameOver();
+        bool checkGameOver();
+        void printWinner();
 
     private:
+        bool isGameOver;
         TileBag* tb;
         std::vector<Player*> players;
         GameBoard* gb;
@@ -38,7 +39,6 @@ class GameEngine {
                                         {'H', 4}, {'I', 1}, {'J', 8}, {'K', 5}, {'L', 1}, {'M', 3}, {'N', 1},
                                         {'O', 1}, {'P', 3}, {'Q', 10}, {'R', 1}, {'S', 1}, {'T', 1}, {'U', 1},
                                         {'V', 4}, {'W', 4}, {'X', 8}, {'Y', 4}, {'Z', 10}};
-
 };
 
 #endif // MENU_H

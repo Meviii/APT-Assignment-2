@@ -8,6 +8,15 @@ Player::Player(std::string name, LinkedList* tile_hand){
     this->name = name;
     this->score = 0;
     this->hand = tile_hand;
+    this->passCounter = 0;
+}
+
+int Player::getPassCounter(){
+    return passCounter;
+}
+
+void Player::setPassCounter(int pass_counter){
+    this->passCounter = pass_counter;
 }
 
 int Player::getScore(){
@@ -36,6 +45,10 @@ void Player::setHand(TileBag* tb){
 
 LinkedList* Player::getHand(){
     return hand;
+}
+
+int Player::getHandSize(){
+    return hand->getSize();
 }
 
 void Player::printHand(){

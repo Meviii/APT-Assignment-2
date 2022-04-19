@@ -25,11 +25,14 @@ class Player{
         bool isTileInHand(Letter letter);
         Tile* getTileInHand(Letter letter);
         void removeTileInHand(Letter letter);
-
+        int getPassCounter();
+        void setPassCounter(int pass_counter);
+        int getHandSize();
         bool canDrawTile(TileBag* tb);
         void drawTile(TileBag* tb);
 
     private:
+        int passCounter;
         std::string name;
         int score;
         LinkedList* hand;

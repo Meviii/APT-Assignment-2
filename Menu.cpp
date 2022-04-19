@@ -117,6 +117,7 @@ void Menu::playerSelection(int i){
         Player* tmp_p = new Player();
         tmp_p->setName(player_name);
         tmp_p->setScore(0);
+        tmp_p->setPassCounter(0);
         players.push_back(tmp_p);
         std::cout << "Player" << x << " name set to: " << player_name << std::endl;
         std::cin.clear();

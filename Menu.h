@@ -14,6 +14,7 @@
 #include <vector>
 #include <sstream>
 #include <map>
+#include <ctype.h>
 
 class Menu {
     public:

@@ -1,7 +1,3 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
 #include "Menu.h"
 
 
@@ -16,19 +12,19 @@ Menu::~Menu(){}
 
 void Menu::runMenu(){
     this->choice = 0;
+    this->printMenu();
 
-    if (this->choice <= 4 && std::cin.eof() != true) {
-        this->printMenu();
-        std::cout << "> ";
-        std::cin >> this->choice;
+    while(!(std::cin >> this->choice)){
+        if (this->choice == 99){
+            return;
+        }
         std::cin.clear();
-        this->runChoice();
-    }else if (std::cin.eof()) {
-        std::cout << "Goodbye" << std::endl;
-        return;
-    }else{
-        std::cout << "Incorrect Input" << std::endl;
+        std::cin.ignore(10000, '\n');
+        std::cout << "Invalid input" << std::endl;
     }
+
+    this->runChoice();
+
 }
 
 void Menu::printMenu(){
@@ -44,27 +40,35 @@ void Menu::printMenu(){
 
 void Menu::runChoice(){
 
-    if(this->choice == 1) {
-        this->playerCheck();
-    }else if(this->choice == 2) {
-        std::cout << "Option 2 chosen" << std::endl;
+    while (this->choice != 4 || std::cin.eof() == true){
+        if(this->choice == 1) {
+            this->playerCheck();
 
-    }else if(this->choice == 3) {
-        this->printCredits();
+        }else if(this->choice == 2) {
+            std::cout << "Option 2 chosen" << std::endl;
+            this->runMenu();
+            
+        }else if(this->choice == 3) {
+            this->printCredits();
+            this->runMenu();
 
-    }else if(this->choice == 4){
-        std::cout << "Goodbye!" << std::endl;
-        this->choice = 4;
-
-    }else if(std::cin.eof() == true) {
-        std::cout << "Goodbye!" << std::endl;
-    }else {
-        std::cout << "Invalid Input" << std::endl;
-        return this->runMenu(); // needs ot be fixed
+        }else if(this->choice == 4){
+            std::cout << "Goodbye!" << std::endl;
+            return;
+        }else if(std::cin.eof() == true) {
+            std::cout << "Goodbye!" << std::endl;
+            return;
+        }else {
+            std::cout << "Invalid Input" << std::endl;
+            this->choice = 0;
+            this->runMenu();
+        }
     }
+    std::cout << "Goodbye!" << std::endl;
 }
 
 void Menu::printCredits(){
+    std::cout << std::endl;
     std::cout << "Name: Mevlut Saluk" << std::endl;
     std::cout << "Student ID: S3717696" << std::endl;
     std::cout << "Email: S3717696@rmit.edu.com.au" << std::endl;

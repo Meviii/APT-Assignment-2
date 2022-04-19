@@ -74,13 +74,20 @@ void GameEngine::gamePlay(){
                     }else{
                         std::cout << "Invalid Input" << std::endl;
                     }
-                }else if (this->argTokenizer(input).size() == 2){
-                    if (input.substr(0,8) == "replace " && input.substr(6,1).size() == 1){ // Main Block #4
+                }else if (this->argTokenizer(input).size() == 2){ // Main Block #4
+                    if (input.substr(0,8) == "replace " && input.substr(6,1).size() == 1){ 
 
                     replaceTile(input);
                     turn_end = true;
                     }
 
+                }else if (input == "quit"){ // Main Block #5
+                    isGameOver = true;
+                    std::cout << "Goodbye!" << std::endl;
+                    std::abort();
+                }else if (input == "save"){ // Main Block #6
+                    std::cout << "save game selected" << std::endl;
+                    return;
                 }else{ // Main Else Block
                     std::cout << "Incorrect Input" << std::endl;
                 }

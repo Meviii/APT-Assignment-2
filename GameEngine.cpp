@@ -15,7 +15,6 @@ void GameEngine::gamePlay(){
     for (Player* p : players){
         p->setHand(tb);
     }
-
     this->curr_player_turn = 0;
     curr_player = players[curr_player_turn];
 
@@ -302,8 +301,6 @@ void GameEngine::saveGame(std::string inputFile){
             }
             iter_sz += 1;
         }
-
-        gameData << curr_player_turn;
     }
     gameData.close();
 }

@@ -238,7 +238,6 @@ void Menu::loadGame(std::string inputFile){
         char board_row_char = line[2];
         int board_col = line[3] - '0';
         int board_row = gb->boardRow.find(board_row_char)->second;
-        std::cout << board_row << std::endl;
         Tile* tmp_board_tile = new Tile(tmp_board_char, ge->valueByLetter(tmp_board_char));
         
         gb->addTile(board_row,board_col,tmp_board_tile);

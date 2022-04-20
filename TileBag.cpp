@@ -10,7 +10,9 @@ TileBag::TileBag(LinkedList* tile_list){
     shuffle();
 }
 
-TileBag::~TileBag(){}
+TileBag::~TileBag(){
+    tile_list->~LinkedList();
+}
 
 void TileBag::setAsList(LinkedList* tile_list){
     this->tile_list = tile_list;

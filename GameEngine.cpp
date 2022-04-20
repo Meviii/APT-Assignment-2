@@ -22,7 +22,7 @@ void GameEngine::gamePlay(){
     isGameOver = false;
 
     while (isGameOver == false){
-
+        gb->printBoard();
         if (isGameOver == false){
             if (this->checkGameOver() == true){
                 this->printWinner();
@@ -47,21 +47,22 @@ void GameEngine::gamePlay(){
                     std::cin.clear();
                     std::cin.ignore();
                 }
-                std::cout << input << std::endl;
-                if (input == "place Done"){ // Main Block #1
+                std::transform(input.begin(), input.end(), input.begin(), ::toupper);
+
+                if (input == "PLACE DONE"){ // Main Block #1
                     if (curr_player->getPassCounter() == 1){
                         curr_player->setPassCounter(0);
                     }
                     changePlayer();
                     turn_end = true;
 
-                }else if (input == "skip"){ // Main Block #2
+                }else if (input == "PASS"){ // Main Block #2
                     curr_player->setPassCounter((curr_player->getPassCounter() + 1));
                     changePlayer();
                     turn_end = true;
 
                 }else if(this->argTokenizer(input).size() == 4){ // Main Block #3
-                    if (input.substr(0,6) == "place " && input.substr(6,1).size() == 1 && input.substr(8,3) == "at " && input.substr(11,2).size() <= 3){ // Main Block #3
+                    if (input.substr(0,6) == "PLACE " && input.substr(6,1).size() == 1 && input.substr(8,3) == "AT " && input.substr(11,2).size() <= 3){ // Main Block #3
 
                         tile_place_counter += 1;
                         if (tile_place_counter == 7){
@@ -75,19 +76,27 @@ void GameEngine::gamePlay(){
                         std::cout << "Invalid Input" << std::endl;
                     }
                 }else if (this->argTokenizer(input).size() == 2){ // Main Block #4
-                    if (input.substr(0,8) == "replace " && input.substr(6,1).size() == 1){ 
+                    if (input.substr(0,8) == "REPLACE " && input.substr(6,1).size() == 1){ 
 
                     replaceTile(input);
                     turn_end = true;
                     }
 
-                }else if (input == "quit"){ // Main Block #5
+                }else if (input == "QUIT"){ // Main Block #5
                     isGameOver = true;
                     std::cout << "Goodbye!" << std::endl;
                     std::abort();
-                }else if (input == "save"){ // Main Block #6
-                    std::cout << "save game selected" << std::endl;
-                    return;
+                }else if (input == "SAVE"){ // Main Block #6
+                    std::string save_file;
+                    std::cout << "Please enter a filename to save: " << std::endl;
+                    std::cout << "> ";
+                    while(!(std::cin >> save_file)){
+                        std::cin.clear();
+                        std::cin.ignore(10000, '\n');
+                        std::cout << "Invalid input" << std::endl;
+                    }
+                    this->saveGame(save_file);
+                    std::cout << "Continuing game..." << std::endl;
                 }else{ // Main Else Block
                     std::cout << "Incorrect Input" << std::endl;
                 }
@@ -118,12 +127,15 @@ void GameEngine::placeTile(std::string input){
     int valueOfPositionOnBoard;
 
     std::vector<std::string> s = this->argTokenizer(input);
-
+    
     arg = s[0]; // holds argument : place
     tileHandLetter = s[1]; // holds tile letter for playser hand
     holder = s[2]; // holds : at
     positionOnBoard = s[3]; // holds position to place on board
     valueOfPositionOnBoard = std::stoi(positionOnBoard.substr(1,3)); // holds the '1' value of 'C1'
+
+    std::transform(tileHandLetter.begin(), tileHandLetter.end(), tileHandLetter.begin(), ::toupper);
+    std::transform(positionOnBoard.begin(), positionOnBoard.end(), positionOnBoard.begin(), ::toupper);
 
     char charHandLetter = tileHandLetter[0];
     Tile* tile_to_place = new Tile((Letter) charHandLetter,(Value) this->valueByLetter( ((Letter) charHandLetter)));
@@ -218,69 +230,81 @@ void GameEngine::printWinner(){
     return;
 }
 
-// BACKUP :D
+void GameEngine::saveGame(std::string inputFile){
+    std::ofstream gameData;
 
-// void GameEngine::gamePlay(){
+    gameData.open(inputFile);
 
-//     for (Player* p : players){
-//         p->setHand(tb);
-//     }
+    if (!gameData){
+        std::cout << "Error saving game" << std::endl;
+    }else{
+        // SAVE PLAYER AMOUNT
+        gameData << players.size() << "\n";
+        // SAVE PLAYERS
+        for(Player* p : players){
+            gameData << p->getName() << "\n";
+            gameData << p->getScore() << "\n";
+            gameData << p->getPassCounter() << "\n";
 
-//     this->curr_player_turn = 0;
-//     curr_player = players[curr_player_turn];
+            LinkedList* player_hand = p->getHand();
+            Node* h = player_hand->getHead();
+            for (int i = 0; i < PLAYER_HAND_AMOUNT; i++){
+                if (i == (PLAYER_HAND_AMOUNT-1)){
+                    gameData << h->tile->getLetter() << "-" << h->tile->getValue() << "\n";
+                }else{
+                    gameData << h->tile->getLetter() << "-" << h->tile->getValue() << ", ";
+                }
+                h = h->next;
+            }
+        }
+        // SAVE TILEBAG
+        int tb_size = tb->getSize();
+        LinkedList* tb_list = tb->getList();
+        Node* tb_h = tb_list->getHead();
+        for (int i = 0; i < tb_size; i++){ 
+            if (i == (tb_size-1)){
+                gameData << tb_h->tile->getLetter() << "-" << tb_h->tile->getValue() << "\n";
+            }else{
+                gameData << tb_h->tile->getLetter() << "-" << tb_h->tile->getValue() << ", ";
+            }
+            tb_h = tb_h->next;
+        }
+        // SAVE BOARD
+        char alpha[15] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O'};
+    
+        gameData << "    0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  " << "\n";
+        gameData << "---------------------------------------------------------------" << "\n";
+        std::vector<std::vector<Tile *>> board = gb->getBoard();
+        std::map<Tile*, std::string> tl_on_board;
+        int gb_size = gb->getSize();
+        for (int row = 0; row < gb_size; row++){
+            gameData << alpha[row] << " ";
+            for (int col = 0; col < gb_size; col++){
+                if (board[row][col] == nullptr){
+                    gameData << "| ";
+                }else if (board[row][col] != nullptr && board[row][col]->getLetter() == ' '){
+                    gameData << "| " << board[row][col]->getLetter() << " ";
+                }else{
+                    std::string tmp = std::to_string(col);
+                    tl_on_board.insert({board[row][col], (alpha[row] + tmp)});
+                    gameData << "| " << board[row][col]->getLetter() << " ";
+                }
+            }
+            gameData << "|" << "\n";
+        }
+        // SAVE TILES PLACES ON BOARD 
+        unsigned int iter_sz = 0;
+        for (auto const& x : tl_on_board){
+            if (iter_sz == tl_on_board.size()-1){
+                gameData << x.first->getLetter() << "@" << x.second;
+            }else{
+                gameData << x.first->getLetter() << "@" << x.second << ", ";
+            }
+            iter_sz += 1;
+        }
 
-//     isGameOver = false;
+        gameData << curr_player_turn;
+    }
+    gameData.close();
+}
 
-//     while (isGameOver == false){
-        
-//         if (this->checkGameOver() == true){
-//             this->printWinner();
-//         }
-
-//         std::string input;
-//         std::cout << std::endl;
-//         std::cout << curr_player->getName() << ", it's your turn" << std::endl;
-//         std::cout << std::endl;
-//         for (Player* p : players){
-//             std::cout << "Score for " << p->getName() << ": " << p->getScore() << std::endl;
-//         }
-//         std::cout << std::endl;
-//         curr_player->printHand();
-
-//         if (isGameOver == false){
-
-//             std::cout << "> ";
-//             while (!std::getline(std::cin >> std::ws, input)){
-//                 std::cout << "Incorrect input" << std::endl;
-//                 std::cin.clear();
-//                 std::cin.ignore();
-//             }
-//             std::cout << input << std::endl;
-//             std::cout << curr_player->getPassCounter() << std::endl;
-//             if (input == "place Done"){ // Main Block #1
-
-//                 if (curr_player->getPassCounter() == 1){
-//                     curr_player->setPassCounter(0);
-//                 }
-//                 changePlayer();
-
-//             }else if (input == "skip"){
-                
-//                 curr_player->setPassCounter((curr_player->getPassCounter() + 1));
-//                 changePlayer();
-
-//             }else if(input.substr(0,6) == "place " && input.substr(6,1).size() == 1 && input.substr(8,3) == "at " && input.substr(11,2).size() <= 3){ // Main Block #2
-
-//                 placeTile(input);
-
-
-//             }else if (input.substr(0,8) == "replace " && input.substr(6,1).size() == 1){ // Main Block #3
-
-//                 replaceTile(input);
-
-//             }else{
-//                 std::cout << "Incorrect Input" << std::endl;
-//             }
-//         }
-//     }
-// }

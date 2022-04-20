@@ -15,6 +15,7 @@
 #include <sstream>
 #include <map>
 #include <stdlib.h>
+#include <algorithm>
 
 class GameEngine {
     public:
@@ -28,6 +29,7 @@ class GameEngine {
         void replaceTile(std::string input);
         bool checkGameOver();
         void printWinner();
+        void saveGame(std::string inputFile);
 
     private:
         bool isGameOver;

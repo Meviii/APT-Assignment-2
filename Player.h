@@ -30,6 +30,8 @@ class Player{
         int getHandSize();
         bool canDrawTile(TileBag* tb);
         void drawTile(TileBag* tb);
+        void printRawHand();
+        void addToHand(Tile* tile);
 
     private:
         int passCounter;

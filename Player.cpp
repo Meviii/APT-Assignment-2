@@ -47,6 +47,10 @@ LinkedList* Player::getHand(){
     return hand;
 }
 
+void Player::addToHand(Tile* tile){
+    this->hand->addBack(tile);
+}
+
 int Player::getHandSize(){
     return hand->getSize();
 }
@@ -64,6 +68,18 @@ void Player::printHand(){
         h = h->next;
     }
     std::cout << std::endl;
+}
+
+void Player::printRawHand(){
+    Node* h = hand->getHead();
+    for (int i = 0; i < PLAYER_HAND_AMOUNT; i++){
+        if (i == (PLAYER_HAND_AMOUNT-1)){
+            std::cout << h->tile->getLetter() << "-" << h->tile->getValue();
+        }else{
+            std::cout << h->tile->getLetter() << "-" << h->tile->getValue() << ", ";
+        }
+        h = h->next;
+    }
 }
 
 Tile* Player::getTileInHand(Letter letter){

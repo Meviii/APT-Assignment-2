@@ -31,6 +31,7 @@ class Menu {
         std::vector<std::string> argTokenizer(std::string input);
         int argCounter(std::string input);
         bool isTwoPlayer();
+        void loadGame(std::string inputFile);
         
     private:
         int choice;

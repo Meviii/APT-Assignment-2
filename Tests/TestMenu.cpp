@@ -8,13 +8,17 @@
 
 int main(void){
 
-    std::string player_name;
+    Menu* m = new Menu();
+    m->loadGame("savegame.txt");
 
-    player_name = "tdasgas";
+    // std::string player_name;
 
-    if (player_name.find_first_of("0123456789") == std::string::npos){
-        std::cout << "cor" << std::endl;
-    }
+    // player_name = "tdasgas";
+
+    // if (player_name.find_first_of("0123456789") == std::string::npos){
+    //     std::cout << "cor" << std::endl;
+    // }
+
 
     // int size = player_name.size();
     // for (int i = 0; i < size; i++){

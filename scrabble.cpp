@@ -5,16 +5,16 @@
 #include <iostream>
 #include <fstream>
 
-#define EXIT_SUCCESS    0
+#define EXIT_SUCCESS 0
 
-int main(int argc, char* args[]) {
+int main(int argc, char *args[])
+{
 
    // std::ofstream saveFile("fileName");
    // saveFile << "Test" << std::endl;
 
-   Menu* menu = new Menu();
+   Menu *menu = new Menu();
    menu->runMenu();
-
 
    return EXIT_SUCCESS;
 }

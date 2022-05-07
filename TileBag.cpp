@@ -51,17 +51,32 @@ void TileBag::removeBack(){
 }
 
 void TileBag::shuffle(){
-    LinkedList* lst = new LinkedList();
+
+    // create new empty list
+    LinkedList* tmpList = new LinkedList();
+    
+
+    // create new tile for shuffle function
     Tile* curr_tile;
 
     int size = (tile_list->getSize());
+
+    // create random seed using time
     srand(time(0));
+
+     
     for (int j = 0; j <= size; j++){
         int i = rand() % size;
-        curr_tile = new Tile(tile_list->getNodeAsTile(i)->getLetter(), tile_list->getNodeAsTile(i)->getValue());
-        lst->addBack(curr_tile);
+
+        // takes a random tile from total tilelist at int i and adds to temporary list
+        curr_tile = new Tile(this->tile_list->getNodeAsTile(i)->getLetter(), this->tile_list->getNodeAsTile(i)->getValue());
+        tmpList->addBack(curr_tile);
+
+        
+        
     } 
-    this->tile_list = lst;
+    this->tile_list = tmpList;
+
 }
 
 void TileBag::readFile(){

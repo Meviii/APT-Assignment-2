@@ -81,6 +81,11 @@ void Menu::printCredits(){
     std::cout << "Student ID: S3717696" << std::endl;
     std::cout << "Email: S3717696@rmit.edu.com.au" << std::endl;
     std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Name: Terrence Taylor" << std::endl;
+    std::cout << "Student ID: S3909238" << std::endl;
+    std::cout << "Email: S3909238@rmit.edu.com.au" << std::endl;
+    std::cout << std::endl;
 }
 
 void Menu::playerCheck(){

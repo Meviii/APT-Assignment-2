@@ -12,9 +12,16 @@ int main(int argc, char *args[])
 
    // std::ofstream saveFile("fileName");
    // saveFile << "Test" << std::endl;
+   if(argc == 3){
+      std::cout << args[1] << " " << args[2] << std::endl;
+      //Will pass args into test logic
 
-   Menu *menu = new Menu();
-   menu->runMenu();
+
+   }
+   else {
+      Menu *menu = new Menu();
+      menu->runMenu();
+   }
 
    return EXIT_SUCCESS;
 }

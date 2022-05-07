@@ -3,18 +3,23 @@
 GameEngine::GameEngine(){
     
 }
-
+/*
+ * Construct a new GameEngine:: GameEngine object
+ * Assigns TileBag, Players and GameBoard
+ */
 GameEngine::GameEngine(TileBag* tb, std::vector<Player*> players, GameBoard* gb) {
     this->tb = tb;
     this->players = players;
     this->gb = gb;
 }
 
+// Implementation of the Scrabble game
 void GameEngine::gamePlay(){
 
     for (Player* p : players){
         p->setHand(tb);
     }
+
     this->curr_player_turn = 0;
     curr_player = players[curr_player_turn];
 
@@ -48,19 +53,22 @@ void GameEngine::gamePlay(){
                 }
                 std::transform(input.begin(), input.end(), input.begin(), ::toupper);
 
-                if (input == "PLACE DONE"){ // Main Block #1
+                // CHOICE #1: Current player has finished placing Tiles
+                if (input == "PLACE DONE"){
                     if (curr_player->getPassCounter() == 1){
                         curr_player->setPassCounter(0);
                     }
                     changePlayer();
                     turn_end = true;
 
-                }else if (input == "PASS"){ // Main Block #2
+                // CHOICE #2: Current player passing their turn
+                }else if (input == "PASS"){
                     curr_player->setPassCounter((curr_player->getPassCounter() + 1));
                     changePlayer();
                     turn_end = true;
 
-                }else if(this->argTokenizer(input).size() == 4){ // Main Block #3
+                // CHOICE #3: Current player placing tiles
+                }else if(this->argTokenizer(input).size() == 4){
                     if (input.substr(0,6) == "PLACE " && input.substr(6,1).size() == 1 && input.substr(8,3) == "AT " && input.substr(11,2).size() <= 3){ // Main Block #3
 
                         tile_place_counter += 1;
@@ -74,18 +82,20 @@ void GameEngine::gamePlay(){
                     }else{
                         std::cout << "Invalid Input" << std::endl;
                     }
-                }else if (this->argTokenizer(input).size() == 2){ // Main Block #4
+                // CHOICE #4: Replaces current players missing Tiles from the TileBag
+                }else if (this->argTokenizer(input).size() == 2){
                     if (input.substr(0,8) == "REPLACE " && input.substr(6,1).size() == 1){ 
 
                     replaceTile(input);
                     turn_end = true;
                     }
-
-                }else if (input == "QUIT"){ // Main Block #5
+                // CHOICE #5: Quit the game
+                }else if (input == "QUIT"){
                     isGameOver = true;
                     std::cout << "Goodbye!" << std::endl;
                     std::abort();
-                }else if (input == "SAVE"){ // Main Block #6
+                // CHOICE #6: Save state of game in the specified save_file
+                }else if (input == "SAVE"){
                     std::string save_file;
                     std::cout << "Please enter a filename to save: " << std::endl;
                     std::cout << "> ";
@@ -96,7 +106,8 @@ void GameEngine::gamePlay(){
                     }
                     this->saveGame(save_file);
                     std::cout << "Continuing game..." << std::endl;
-                }else{ // Main Else Block
+                }else{ 
+                    // INVALID INPUT: Current player to re-enter their choice
                     std::cout << "Incorrect Input" << std::endl;
                 }
             }
@@ -117,7 +128,14 @@ std::vector<std::string> GameEngine::argTokenizer(std::string input){
     }
     return s;
 }
-
+/*
+ * 
+ * arg holds argument : place
+ * tileHandLetter holds tile letter for player hand
+ * holder holds : at
+ * positionOnBoard holds position to place on board
+ * valueOfPositionOnBoard holds the point value of the position. eg. holds the '1' value of 'C1'
+ */
 void GameEngine::placeTile(std::string input){
     std::string arg;
     std::string tileHandLetter;
@@ -127,11 +145,11 @@ void GameEngine::placeTile(std::string input){
 
     std::vector<std::string> s = this->argTokenizer(input);
     
-    arg = s[0]; // holds argument : place
-    tileHandLetter = s[1]; // holds tile letter for playser hand
-    holder = s[2]; // holds : at
-    positionOnBoard = s[3]; // holds position to place on board
-    valueOfPositionOnBoard = std::stoi(positionOnBoard.substr(1,3)); // holds the '1' value of 'C1'
+    arg = s[0];
+    tileHandLetter = s[1];
+    holder = s[2];
+    positionOnBoard = s[3];
+    valueOfPositionOnBoard = std::stoi(positionOnBoard.substr(1,3));
 
     std::transform(tileHandLetter.begin(), tileHandLetter.end(), tileHandLetter.begin(), ::toupper);
     std::transform(positionOnBoard.begin(), positionOnBoard.end(), positionOnBoard.begin(), ::toupper);
@@ -141,10 +159,13 @@ void GameEngine::placeTile(std::string input){
     
     if (gb->isTileValid(gb->boardRow.find(positionOnBoard[0])->second, valueOfPositionOnBoard) && curr_player->isTileInHand(charHandLetter)) {
         
+        //Place Tile
         gb->addTile(gb->boardRow.find(positionOnBoard[0])->second, valueOfPositionOnBoard, tile_to_place); // place tile
-        curr_player->removeTileInHand(charHandLetter); // remove the tile from hand
+        //Remove Tile
+        curr_player->removeTileInHand(charHandLetter);
 
-        if (curr_player->canDrawTile(tb)){ // draw tile if available
+        //Draw Tile if available
+        if (curr_player->canDrawTile(tb)){
             curr_player->drawTile(tb);
         }
 
@@ -237,9 +258,10 @@ void GameEngine::saveGame(std::string inputFile){
     if (!gameData){
         std::cout << "Error saving game" << std::endl;
     }else{
-        // SAVE PLAYER AMOUNT
+        // Save player amount
         gameData << players.size() << "\n";
-        // SAVE PLAYERS
+
+        // Save players
         for(Player* p : players){
             gameData << p->getName() << "\n";
             gameData << p->getScore() << "\n";
@@ -256,7 +278,7 @@ void GameEngine::saveGame(std::string inputFile){
                 h = h->next;
             }
         }
-        // SAVE TILEBAG
+        // Save TileBag
         int tb_size = tb->getSize();
         LinkedList* tb_list = tb->getList();
         Node* tb_h = tb_list->getHead();
@@ -268,7 +290,7 @@ void GameEngine::saveGame(std::string inputFile){
             }
             tb_h = tb_h->next;
         }
-        // SAVE BOARD
+        // Save GameBoard's current state
         char alpha[15] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O'};
     
         gameData << "    0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  " << "\n";
@@ -291,7 +313,7 @@ void GameEngine::saveGame(std::string inputFile){
             }
             gameData << "|" << "\n";
         }
-        // SAVE TILES PLACES ON BOARD 
+        // Save Tiles
         unsigned int iter_sz = 0;
         for (auto const& x : tl_on_board){
             if (iter_sz == tl_on_board.size()-1){

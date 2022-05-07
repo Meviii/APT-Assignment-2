@@ -2,6 +2,10 @@
 
 #include <iostream>
 
+/*
+ * Construct a new Game Board:: Game Board object
+ * Assigns empty tiles to each co-ordinate on the GameBoard
+ */
 GameBoard::GameBoard(){
     gameRow.assign(BOARD_SIZE, nullptr);
     board.assign(BOARD_SIZE, gameRow);
@@ -27,6 +31,9 @@ int GameBoard::getSize(){
     return board.size();
 }
 
+/*
+ * Prints current state of GameBoard object to output
+ */
 void GameBoard::printBoard(){
     char alpha[15] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O'};
     
@@ -46,6 +53,11 @@ void GameBoard::printBoard(){
     }
 }
 
+/*
+ * Checks for validity of a Tile
+ * Returns true if Tile is within GameBoard bounds
+ * and if the Tile is open
+ */
 bool GameBoard::isTileValid(int row, int col){ // Area checks, open tile check 
     return row < BOARD_SIZE && col < BOARD_SIZE && (board[row][col] == NULL || board[row][col]->getLetter() == ' ');
 }

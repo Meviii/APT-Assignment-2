@@ -213,13 +213,8 @@ void GameEngine::placeTile(std::string input)
     }
 }
 
-<<<<<<< HEAD
-//Cycle through players
-void GameEngine::changePlayer(){
-=======
 void GameEngine::changePlayer()
 {
->>>>>>> 11323a7ffd91bf06e710f5ef8f79a8083da069ba
     int players_size = players.size();
 
     if (players_size > (curr_player_turn + 1))
@@ -238,17 +233,13 @@ void GameEngine::changePlayer()
     }
 }
 
-<<<<<<< HEAD
 /*
  * Removes specified tile from players hand.
  * Replaces (adds to the back of the player's hand) with a Tile from the TileBag
  * Removes that tile form the TileBag
  */
-void GameEngine::replaceTile(std::string input){
-=======
-void GameEngine::replaceTile(string input)
+void GameEngine::replaceTile(std::string input)
 {
->>>>>>> 11323a7ffd91bf06e710f5ef8f79a8083da069ba
     char tileLetterToRemove;
 
     vector<string> s = this->argTokenizer(input);
@@ -271,18 +262,13 @@ void GameEngine::replaceTile(string input)
     }
 }
 
-<<<<<<< HEAD
 /*
  * Check game end conditions
  * i.e. If no more Tiles in TileBag, and for any player either no Tiles in hand 
  * or 2 consecutive passes 
  */
-bool GameEngine::checkGameOver(){
-=======
 bool GameEngine::checkGameOver()
 {
->>>>>>> 11323a7ffd91bf06e710f5ef8f79a8083da069ba
-
     if (tb->getSize() == 0)
     {
         this->isGameOver = true;
@@ -301,29 +287,19 @@ bool GameEngine::checkGameOver()
     return false;
 }
 
-<<<<<<< HEAD
 /*
  * Outputs winner and their score
  * Iterates through players to find highest score
  * due to variable number of players
  */
-void GameEngine::printWinner(){
+void GameEngine::printWinner()
+{
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "Game Over!" << std::endl;
     
     Player* tmp = new Player();
-=======
-void GameEngine::printWinner()
-{
-    cout << endl;
-    cout << endl;
-    cout << endl;
-    cout << "Game Over!" << endl;
-
-    Player *tmp = new Player();
->>>>>>> 11323a7ffd91bf06e710f5ef8f79a8083da069ba
     int highest_score = 0;
     for (Player *p : players)
     {
@@ -341,18 +317,13 @@ void GameEngine::printWinner()
     return;
 }
 
-<<<<<<< HEAD
 /*
  *Saves snapshot of current gamestate
  *to a user specified file
  */
-void GameEngine::saveGame(std::string inputFile){
-    std::ofstream gameData;
-=======
-void GameEngine::saveGame(string inputFile)
+void GameEngine::saveGame(std::string inputFile)
 {
-    ofstream gameData;
->>>>>>> 11323a7ffd91bf06e710f5ef8f79a8083da069ba
+    std::ofstream gameData;
 
     gameData.open(inputFile);
 
@@ -365,14 +336,8 @@ void GameEngine::saveGame(string inputFile)
         // Save player amount
         gameData << players.size() << "\n";
 
-<<<<<<< HEAD
         // Save players' names, points, num. passes, hands as LinkedLists
         for(Player* p : players){
-=======
-        // Save players
-        for (Player *p : players)
-        {
->>>>>>> 11323a7ffd91bf06e710f5ef8f79a8083da069ba
             gameData << p->getName() << "\n";
             gameData << p->getScore() << "\n";
             gameData << p->getPassCounter() << "\n";

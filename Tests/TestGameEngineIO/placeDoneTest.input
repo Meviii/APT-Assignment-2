@@ -1,0 +1,9 @@
+2
+./Tests/TestGameEngineIO/placeDoneTest.sav
+PLACE R AT D3
+PLACE I AT D4
+PLACE DONE
+PLACE DONE
+PASS
+PLACE DONE
+QUIT

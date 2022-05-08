@@ -1,0 +1,6 @@
+SAVE
+2
+./Tests/TestGameEngineIO/saveTestIn.sav
+SAVE
+./Tests/TestGameEngineIO/saveTestOut.sav
+QUIT

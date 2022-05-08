@@ -85,8 +85,7 @@ void GameEngine::gamePlay()
                 else if (this->argTokenizer(input).size() == 4)
                 {
                     if (input.substr(0, 6) == "PLACE " && input.substr(6, 1).size() == 1 && input.substr(8, 3) == "AT " && input.substr(11, 2).size() <= 3)
-                    { // Main Block #3
-
+                    {
                         tile_place_counter += 1;
                         if (tile_place_counter == 7)
                         {

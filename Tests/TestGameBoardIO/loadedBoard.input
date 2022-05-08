@@ -4,6 +4,4 @@ PLACE U AT E6
 PLACE L AT E7
 PLACE L AT E8
 PLACE DONE
-SAVE
-./Tests/TestGameBoardIO/savedGameBoard.sav
 QUIT

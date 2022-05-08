@@ -5,85 +5,169 @@
 #include <iostream>
 #include <random>
 #include <fstream>
+#include <sstream>
+#include <time.h>
 
-void printList(TileBag* tb);
-void basicFunctions(TileBag* tb);
-void printFirstFive(TileBag* tb);
-void printLastFive(TileBag* tb);
+void testSetAsList(LinkedList* tile_list);
+LinkedList* testGetList();
+int testGetSize();
+Tile* testGetTile(int i);
+Tile* testGetFront();
+void testAddBack(Tile* tile);
+void testRemove(int i);
+void testRemoveFront();
+void testRemoveBack();
+void testShuffle();
+void testReadFile();
+
+class TestTileBag {
+
+    private:
+    LinkedList* tile_list;
+
+    
+    public:
+
+
+    TestTileBag(){
+    this->tile_list = nullptr;
+    }
+
+    TestTileBag(LinkedList* tile_list){
+        this->tile_list = tile_list;
+        this->testReadFile();
+        testShuffle();
+    }
+
+    ~TestTileBag(){
+        tile_list->~LinkedList();
+    }
+
+    void testSetAsList(LinkedList* tile_list){
+        this->tile_list = tile_list;
+    }
+
+    LinkedList* testGetList(){
+        return tile_list;
+    }
+
+    int testGetSize(){
+        return tile_list->getSize();
+    }
+
+    Tile* testGetTile(int i){
+        return tile_list->getNodeAsTile(i);
+    }
+
+    Tile* testGetFront(){
+        return tile_list->getNodeAsTile(0);
+    }
+
+    void testAddBack(Tile* tile){
+        tile_list->addBack(tile);
+    }
+
+    void testRemove(int i){
+        tile_list->removeNode(i);
+    }
+
+    void testRemoveFront(){
+        tile_list->removeNode(0);
+    }
+
+    void testRemoveBack(){
+        tile_list->removeBack();
+    }
+
+    void testShuffle(){
+        
+        LinkedList* tmpList = new LinkedList();        
+        Tile* curr_tile;
+
+        int size = (tile_list->getSize());
+        srand(time(0));
+
+
+        for (int j = 0; j <= size; j++){
+            int i = rand() % size;
+
+            // takes a random tile from total tilelist at int i and adds to temporary list
+            curr_tile = new Tile(this->tile_list->getNodeAsTile(i)->getLetter(), this->tile_list->getNodeAsTile(i)->getValue());
+            tmpList->addBack(curr_tile);
+
+            
+            
+        } 
+        this->tile_list = tmpList;
+
+    }
+
+    void testReadFile(){
+        std::ifstream file;
+        std::string line;
+        std::istringstream iss_line(line);
+        std::string letter;
+        std::string value;
+        file.open("Tests/TestScrabbleTiles.txt");
+        if (!file.is_open()){
+            std::cout << "Can't read file" << std::endl;
+        }else{
+            while (std::getline(file, line)) {
+                letter = line.substr(0,1);
+                value = line.substr(1,-1);
+                int num = std::stoi(value);
+                char c = letter[0];
+                Tile* tmp = new Tile((Letter) c,(Value) num);
+                this->testAddBack(tmp);
+                tmp = nullptr;
+            }
+        }
+    }
+
+
+};
 
 int main(void){
-    
+
     LinkedList* list = new LinkedList();
-    TileBag* tb = new TileBag(list);
+    TestTileBag* tileBag = new TestTileBag(list);
 
-    //tb->readFile()
+    tileBag->testGetList()->printList();
 
-    //tb->shuffle();
-    //printList(tb);
+    std::cout << "Size of list is: " << tileBag->testGetSize() << std::endl;
 
-    basicFunctions(tb);
-    return 0;
-}
+    std::cout << "Tile at back is " << tileBag->testGetTile(tileBag->testGetSize() - 1)->letter << tileBag->testGetTile(tileBag->testGetSize() -1)->value << std::endl;
 
-void basicFunctions(TileBag* tb){
 
-    int size = tb->getSize();
+    std::cout << "Removing 5 tiles from tilebag back" << std::endl;
 
-    std::cout << "Size of bag:" << tb->getSize() << std::endl;
-    std::cout << "getFront:" << tb->getFront()->getLetter() << std::endl;
 
-    std::cout << "=============================" << std::endl;
-
-    Tile* t1 = new Tile('Z',100);
-    tb->addBack(t1);
-    std::cout << "getTile['Z',100]: " << tb->getTile(size)->getValue() << std::endl;
-
-    std::cout << "=============================" << std::endl;
-
-    std::cout << "Remove ['Z',100]" << std::endl;
-    tb->remove(size-1);
-    std::cout << tb->getTile(size-1)->getLetter() << std::endl;
-
-    std::cout << "=============================" << std::endl;
-
-    printLastFive(tb);
-    std::cout << "Remove back" << std::endl;
-    tb->removeBack();
-    printLastFive(tb);
-
-    std::cout << "=============================" << std::endl;
-
-    printFirstFive(tb);
-    std::cout << "Remove front" << std::endl;
-    tb->removeFront();
-    printFirstFive(tb);
-}
-
-void printList(TileBag* tb){
-    for (int i = 0; i < tb->getSize(); i++){
-        std::cout << tb->getTile(i)->getLetter();
-        std::cout << ", ";
-        std::cout << tb->getTile(i)->getValue();
-        std::cout << std::endl;
-    }
-}
-
-void printLastFive(TileBag* tb){
-    std::cout << " >> Printing last 5 elements << " << std::endl;
-    for (int i = 94; i < (tb->getSize()-1); i++){
-        std::cout << tb->getTile(i)->getLetter();
-        std::cout << ", ";
-        std::cout << tb->getTile(i)->getValue();
-        std::cout << std::endl;
-    }
-}
-
-void printFirstFive(TileBag* tb){
-    std::cout << " >> Printing first 5 elements << " << std::endl;
     for (int i = 0; i < 5; i++){
-        std::cout << tb->getTile(i)->getLetter();
-        std::cout << ", ";
-        std::cout << tb->getTile(i)->getValue();
-        std::cout << std::endl;
+        tileBag->testRemoveBack();
     }
+
+    std::cout << "Tile at back is " << tileBag->testGetTile(tileBag->testGetSize() - 1)->letter << tileBag->testGetTile(tileBag->testGetSize() -1)->value << std::endl;
+
+
+    std::cout << "Size of list is: " << tileBag->testGetSize() << std::endl;
+
+    std::cout << "Tile at front is " << tileBag->testGetFront()->letter << tileBag->testGetFront()->value << std::endl;
+
+    
+    std::cout << "Removing 5 tiles from tilebag front" << std::endl;
+
+
+    for (int i = 0; i < 5; i++){
+        tileBag->testRemoveFront();
+    }
+
+    std::cout << "Size of list is: " << tileBag->testGetSize() << std::endl;
+
+    std::cout << "Tile at front is " << tileBag->testGetFront()->letter << tileBag->testGetFront()->value << std::endl;
+
+
+
+    
+    
 }
+

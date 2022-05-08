@@ -3,10 +3,43 @@
 #include <iostream>
 #include <string>
 
-int main(void){
-    Tile* tl1 = new Tile('A',1);
+/**
+ * @brief test the functionality of the Tile class
+ *
+ * @return int
+ */
+int main(void)
+{
+    // 26 amount of Tile pointer array, which used for testing
+    Tile *tiles[26];
+    for (int i = 0; i < 26; i++)
+    {
+        // allocating new Tile object with specified value for each element of the tiles
+        tiles[i] = new Tile('A' + i, i);
+    }
 
-    std::cout << "Letter: " << tl1->getLetter() << std::endl;
-    std::cout << "Value: " << tl1->getValue() << std::endl;
-    std::cout << "Value by letter ('Q'): " << tl1->valueByLetter('Q');
+    for (int i = 0; i < 26; i++)
+    {
+        // print the promption information
+        cout << "Tile Letter: " << tiles[i]->getLetter() << " Tiles Value" << tiles[i]->getValue();
+
+        // if the result matched the expected result, print passed
+        if ((tiles[i]->getLetter() == 'A' + i) && (tiles[i]->getValue() == i))
+        {
+            cout << ", test " << i << " Passed." << endl;
+        }
+        else
+        {
+            cout << ", test " << i << " Failed." << endl;
+        }
+    }
+
+    // delete the dynamic memory allocated
+    for (int i = 0; i < 26; i++)
+    {
+        delete tiles[i];
+        tiles[i] = nullptr;
+    }
+
+    return 0;
 }

@@ -1,16 +1,39 @@
 #include "Tile.h"
 
-Tile::Tile(Letter letter, Value value){
+/**
+ * @brief Construct a new Tile:: Tile object
+ *
+ * @param letter
+ * @param value
+ */
+Tile::Tile(Letter letter, Value value)
+{
     this->letter = letter;
     this->value = value;
 }
 
-Tile::Tile(){}
+/**
+ * @brief Construct a new Tile:: Tile object
+ *
+ */
+Tile::Tile() {}
 
-Letter Tile::getLetter(){
+/**
+ * @brief get the letter of the Tile
+ *
+ * @return Letter
+ */
+Letter Tile::getLetter()
+{
     return this->letter;
 }
 
-Value Tile::getValue(){
+/**
+ * @brief get the score value of the Tile
+ *
+ * @return Value
+ */
+Value Tile::getValue()
+{
     return this->value;
 }

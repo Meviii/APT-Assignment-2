@@ -4,7 +4,9 @@
 #include <iostream>
 #include <map>
 
-
+using std::cout;
+using std::endl;
+using std::string;
 
 // Define a Letter type
 typedef char Letter;
@@ -12,17 +14,18 @@ typedef char Letter;
 // Define a Value type
 typedef int Value;
 
-class Tile {
-   public:
-      Letter letter;
-      Value  value;
-      Tile(Letter letter, Value value);
-      Tile();
-      
-      Letter getLetter();
-      Value  getValue();
+class Tile
+{
+public:
+   Letter letter;
+   Value value;
+   Tile(Letter letter, Value value);
+   Tile();
 
-   private:
+   Letter getLetter();
+   Value getValue();
+
+private:
 };
 
 #endif // ASSIGN2_TILE_H

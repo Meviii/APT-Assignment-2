@@ -7,7 +7,7 @@ LinkedList::LinkedList() {
    head = nullptr;
    tail = nullptr;
    size = 0;
-   // TODO
+   
 }
 
 LinkedList::~LinkedList() {
@@ -30,9 +30,12 @@ Node* LinkedList::getHead(){
 void LinkedList::addBack(Tile* node){
    Node* newNode = new Node(node, nullptr);
 
+   // If list is empty, head is assigned to the given node
    if (head == nullptr){
       head = newNode;
-   }else{
+   }
+   // Else node is assigned to end of linked list by iterating through next pointers until nullptr is found
+   else{
       Node* tmp = head;
 
       while(tmp->next != nullptr){
@@ -44,12 +47,13 @@ void LinkedList::addBack(Tile* node){
 }
 
 void LinkedList::addFront(Tile* node){
+
+   //Create new node already pointing to current head node as next
    Node* newNode = new Node(node, head);
 
    if (head == nullptr){
       head = newNode;
    }else{
-      //head->next = head;
       head = newNode;
    }
    size++;
@@ -62,6 +66,7 @@ void LinkedList::removeBack(){
 Node* LinkedList::getNode(int i){
    int counter = 0;
    Node* node = head;
+   // Iterates through nodes until at given index of node
    if (i >= 0 && i <= size){
       while (counter != i && node != nullptr){
          node = node->next;
@@ -76,6 +81,7 @@ Node* LinkedList::getNode(int i){
    return node;
 }
 
+// Same functionality of getNode but takes found node's variables to create a new tile to return
 Tile* LinkedList::getNodeAsTile(int i){
    int counter = 0;
    Node* cur = head;
@@ -102,8 +108,10 @@ bool LinkedList::checkEmpty(){
 void LinkedList::removeNode(int i){
 
    if (i == 0){
+      // Checks if list is empty
       if (head == nullptr){
          return;
+      // Else will assign next node as head and delete current head
       }else{
          Node* tmp = head;
          head = head->next;
@@ -111,11 +119,13 @@ void LinkedList::removeNode(int i){
          delete tmp;
          return;
       }
+   // If node is between 0 and list size (not head or tail)
    }else if (i > 0 && i < size){
       Node* n = getNode(i-1);
       Node* n1 = getNode(i+1);
       n->next = n1;
       size++;
+   // Else if wanted node deleted is tail
    }else if (i == size){
       this->tail = nullptr;
    }else{

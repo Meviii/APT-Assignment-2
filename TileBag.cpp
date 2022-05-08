@@ -1,5 +1,8 @@
 #include "TileBag.h"
 
+
+// Tilebag acts as a container for a linked list with added specific functionality when used in the game such as reading the file in
+// and shuffling at construction
 TileBag::TileBag(){
     this->tile_list = nullptr;
 }
@@ -79,6 +82,8 @@ void TileBag::shuffle(){
 
 }
 
+
+// Reads in given file line by line and assigns the character and value in each line to a tile to then add to the TileBag linked list
 void TileBag::readFile(){
     std::ifstream file;
     std::string line;

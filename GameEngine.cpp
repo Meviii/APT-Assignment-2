@@ -128,13 +128,15 @@ std::vector<std::string> GameEngine::argTokenizer(std::string input){
     }
     return s;
 }
+
 /*
- * 
- * arg holds argument : place
- * tileHandLetter holds tile letter for player hand
- * holder holds : at
- * positionOnBoard holds position to place on board
- * valueOfPositionOnBoard holds the point value of the position. eg. holds the '1' value of 'C1'
+ * Place a tile on the board for the current player:
+ * Arguments:
+ * arg - text command "PLACE"
+ * tileHandLetter - the Tile letter to play
+ * holder - the text command "AT"
+ * positionOnBoard - letter or y-axis position to be placed (A - O)
+ * valueOfPositionOnBoard - number or x-axis position to be placed (0 -14))
  */
 void GameEngine::placeTile(std::string input){
     std::string arg;
@@ -178,6 +180,7 @@ void GameEngine::placeTile(std::string input){
     }
 }
 
+//Cycle through players
 void GameEngine::changePlayer(){
     int players_size = players.size();
 
@@ -192,6 +195,11 @@ void GameEngine::changePlayer(){
     }
 }
 
+/*
+ * Removes specified tile from players hand.
+ * Replaces (adds to the back of the player's hand) with a Tile from the TileBag
+ * Removes that tile form the TileBag
+ */
 void GameEngine::replaceTile(std::string input){
     char tileLetterToRemove;
 
@@ -211,6 +219,11 @@ void GameEngine::replaceTile(std::string input){
     }
 }
 
+/*
+ * Check game end conditions
+ * i.e. If no more Tiles in TileBag, and for any player either no Tiles in hand 
+ * or 2 consecutive passes 
+ */
 bool GameEngine::checkGameOver(){
 
     if (tb->getSize() == 0){
@@ -228,6 +241,11 @@ bool GameEngine::checkGameOver(){
     return false;
 }
 
+/*
+ * Outputs winner and their score
+ * Iterates through players to find highest score
+ * due to variable number of players
+ */
 void GameEngine::printWinner(){
     std::cout << std::endl;
     std::cout << std::endl;
@@ -250,6 +268,10 @@ void GameEngine::printWinner(){
     return;
 }
 
+/*
+ *Saves snapshot of current gamestate
+ *to a user specified file
+ */
 void GameEngine::saveGame(std::string inputFile){
     std::ofstream gameData;
 
@@ -261,7 +283,7 @@ void GameEngine::saveGame(std::string inputFile){
         // Save player amount
         gameData << players.size() << "\n";
 
-        // Save players
+        // Save players' names, points, num. passes, hands as LinkedLists
         for(Player* p : players){
             gameData << p->getName() << "\n";
             gameData << p->getScore() << "\n";
@@ -278,7 +300,7 @@ void GameEngine::saveGame(std::string inputFile){
                 h = h->next;
             }
         }
-        // Save TileBag
+        // Save TileBag as LinkedList
         int tb_size = tb->getSize();
         LinkedList* tb_list = tb->getList();
         Node* tb_h = tb_list->getHead();
@@ -313,7 +335,7 @@ void GameEngine::saveGame(std::string inputFile){
             }
             gameData << "|" << "\n";
         }
-        // Save Tiles
+        // Save Tiles 'LETTER@TILE'
         unsigned int iter_sz = 0;
         for (auto const& x : tl_on_board){
             if (iter_sz == tl_on_board.size()-1){

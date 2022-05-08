@@ -1,0 +1,11 @@
+Running the tests:
+========================
+Run ./scrabble < ./Tests/TestGameEngineIO/<testname>.input > ./Tests/TestGameBoardIO/<testname>.output to make the output file.
+diff -w ./Tests/TestGameEngineIO/<testname>.output ./Tests/TestGameBoardIO/<testname>.expout to run the IO test.
+
+The test Cases:
+========================
+passTest tests the result of placing tiles and then passing, passing multiple times, and trying to 'place done' after passing.
+placeDoneTest tests entering the command 'place done' after placing tiles, without placing tiles, after passing.
+placeTest tests the 7-letter word BINGO, placing tiles not in the current player's hand, placing at occupied board spaces and invalid inputs.
+saveTest tests the save game functionality by loading in a save, and saving it to a different save file. The two save files should be identical.

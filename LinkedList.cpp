@@ -8,7 +8,6 @@ LinkedList::LinkedList()
    head = nullptr;
    tail = nullptr;
    size = 0;
-   // TODO
 }
 
 LinkedList::~LinkedList()
@@ -96,13 +95,8 @@ Node *LinkedList::getNode(int i)
    return node;
 }
 
-Tile *LinkedList::getNodeAsTile(int i)
 {
    int counter = 0;
-   Node *cur = head;
-   Tile *ret = nullptr;
-
-   if (i >= 0 && i <= size)
    {
       while (counter != i && cur != nullptr)
       {
@@ -141,33 +135,22 @@ void LinkedList::removeNode(int i)
          delete tmp;
          return;
       }
-   }
-   else if (i > 0 && i < size)
-   {
-      Node *n = getNode(i - 1);
-      Node *n1 = getNode(i + 1);
-      n->next = n1;
-      size++;
-   }
-   else if (i == size)
-   {
-      this->tail = nullptr;
-   }
-   else
-   {
-      cout << "not in range" << endl;
-      return;
-   }
-   size--;
-}
-
-void LinkedList::printList()
-{
-   cout << "Linked List with tile size: " << size << endl;
-   struct Node *tmp = head;
-   while (tmp != NULL)
-   {
-      cout << "Letter: " << tmp->tile->getLetter() << ", Value: " << tmp->tile->getValue() << endl;
-      tmp = tmp->next;
-   }
-}
+      else if (i > 0 && i < size)
+      {
+         Node *n = getNode(i - 1);
+         Node *n1 = getNode(i + 1);
+         n->next = n1;
+         size++;
+      }
+      else if (i == size)
+      {
+         this->tail = nullptr;
+         {
+            cout << "Linked List with tile size: " << size << endl;
+            struct Node *tmp = head;
+            while (tmp != NULL)
+            {
+               cout << "Letter: " << tmp->tile->getLetter() << ", Value: " << tmp->tile->getValue() << endl;
+               tmp = tmp->next;
+            }
+         }

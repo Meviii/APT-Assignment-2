@@ -3,4 +3,6 @@ SAVE
 ./Tests/TestGameEngineIO/saveTestIn.sav
 SAVE
 ./Tests/TestGameEngineIO/saveTestOut.sav
+SAVE
+./Tests/TestGameEngineIO/saveTestOut.sav
 QUIT

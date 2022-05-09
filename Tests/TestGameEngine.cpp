@@ -403,6 +403,36 @@ class TestGameEngine
 
 
 int main(void){
+
+    Menu *menu = new Menu();
+    menu->loadGame("./savegame.txt");
+    //Needs user input
+
+    LinkedList* list = new LinkedList();
+    TileBag *tb = new TileBag(list);
+    std::cout << tb->getSize() <<std::endl;
+    std::cout << tb->getList() <<std::endl;
+
+    GameBoard *gb = new GameBoard();
+    Player *p1 = new Player();
+    p1->setName("Jo");
+    p1->setHand(tb);
+    p1->setScore(0);
+    p1->setPassCounter(0);
+
+    Player *p2 = new Player();
+    p2->setName("Ma");
+    p2->setHand(tb);
+    p2->setScore(0);
+    p2->setPassCounter(0);
+
+    std::vector<Player *> players;
+    players.push_back(p1);
+    players.push_back(p2);
+
+    GameEngine *ge = new GameEngine(tb, players, gb);
+    ge->saveGame("./savegame2.txt");
+
     Player* pl1 = new Player();
     Player* pl2 = new Player();
     LinkedList* list = new LinkedList();
@@ -430,6 +460,7 @@ int main(void){
 
 
     //Test 1: Return values of tiles by their letter
+    char 
     for(int i = 0; i < 26; i++){
         char currLetter = ('A' + i);
         std::cout << currLetter << " has a value of: " << ge->testValueByLetter('A' + i) << std::endl;

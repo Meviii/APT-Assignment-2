@@ -235,22 +235,25 @@ void Menu::newGame()
 void Menu::loadGame(string inputFile)
 {
     // initialize the TileBag and GameBoard objects
-    LinkedList *list = new LinkedList();
-    TileBag *tb = new TileBag(list);
+ 
+    LinkedList* list = new LinkedList();
+    TileBag *tb = new TileBag();
     GameBoard *gb = new GameBoard();
-
+    
     ifstream gameData;
-
+    tb->setAsList(list);
+ 
     // clear current players in the container
     players.~vector();
-
+ 
     gameData.open(inputFile);
+ 
     if (!gameData || gameData.fail())
     {
         cout << "Error loading game" << endl;
         this->runMenu();
     }
-
+ 
     // GET PLAYER COUNT
     int pl_count;
     gameData >> pl_count;
@@ -258,15 +261,15 @@ void Menu::loadGame(string inputFile)
     string name;
     int score;
     int pass_count;
-
+ 
     string line;
-
+ 
     for (int i = 0; i < pl_count; i++)
     {
         // load player from the file
         Player *tmp_pl = new Player();
         // basic string
-
+ 
         // load the player name, score, pass_count
         gameData >> name;
         gameData >> score;
@@ -292,7 +295,7 @@ void Menu::loadGame(string inputFile)
         tmp_pl->printHand();
         players.push_back(tmp_pl);
     }
-
+ 
     // TileBag
     // load the left TileBag from the file
     getline(gameData >> ws, line);
@@ -307,14 +310,18 @@ void Menu::loadGame(string inputFile)
         Tile *tmp_tile = new Tile(tmp_tb_char, tmp_tb_int);
         tile_bag.push_back(tmp_tile);
     }
-    tb->~TileBag();
+    //tb->~TileBag();
+ 
     int new_tb_size = tile_bag.size();
+ 
     for (int tl = 0; tl < new_tb_size; tl++)
     {
         // initialize the TileBag object
-        tb->addBack(tile_bag[tl]);
+        Tile* tmp = new Tile(tile_bag[tl]->getLetter(), tile_bag[tl]->getValue());
+        //list->addBack(tmp);
+        tb->addBack(tmp);
     }
-
+ 
     // Skip lines
     for (int skip = 0; skip < 17; skip++)
     {
@@ -335,7 +342,7 @@ void Menu::loadGame(string inputFile)
         int board_col = line[3] - '0';
         int board_row = gb->boardRow.find(board_row_char)->second;
         Tile *tmp_board_tile = new Tile(tmp_board_char, ge->valueByLetter(tmp_board_char));
-
+ 
         gb->addTile(board_row, board_col, tmp_board_tile);
     }
 

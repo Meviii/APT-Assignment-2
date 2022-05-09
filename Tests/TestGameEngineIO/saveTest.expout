@@ -1,13 +1,21 @@
-2
-Hoooo
-0
-0
-I-1, S-1, R-1, U-1, T-1, I-1, A-1
-Haaa
-0
-0
-E-1, I-1, D-2, Y-4, N-1, A-1, V-4
-E-1, F-4, O-1, A-1, M-3, E-1, T-1, T-1, R-1, I-1, M-3, L-1, I-1, E-1, W-4, U-1, A-1, G-2, O-1, H-4, S-1, N-1, S-1, I-1, R-1, R-1, N-1, F-4, F-4, D-2, E-1, A-1, I-1, I-1, B-3, L-1, O-1, L-1, I-1, U-1, I-1, J-8, I-1, T-1, R-1, T-1, R-1, G-2, R-1, I-1, O-1, N-1, L-1, J-8, L-1, S-1, E-1, A-1, B-3, A-1, D-2, T-1, O-1, D-2, T-1, E-1, O-1, I-1, S-1, N-1, T-1, E-1, A-1, S-1, O-1, F-4, O-1, G-2, O-1, X-8, E-1, F-4, A-1, F-4, G-2
+
+Welcome to Scrabble!
+--------------------
+
+Menu
+----
+
+1. New Game
+2. Load Game
+3. Credits (Show student information)
+4. Quit
+
+Invalid input
+Please enter a filename to load: 
+> Your hand is: 
+H-4, T-1, S-1, N-1, I-1, G-2, U-1
+Your hand is: 
+L-1, L-1, R-1, M-3, S-1, N-1, E-1
     0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  
 ---------------------------------------------------------------
 A |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
@@ -25,3 +33,16 @@ L |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 M |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 N |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 O |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+
+Ja, it's your turn
+
+Score for Ja: 0
+Score for JB: 0
+
+Your hand is: 
+H-4, T-1, S-1, N-1, I-1, G-2, U-1
+> Please enter a filename to save: 
+> Continuing game...
+> Please enter a filename to save: 
+> Continuing game...
+> Goodbye!

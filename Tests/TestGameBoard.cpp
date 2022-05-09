@@ -117,4 +117,5 @@ int main(void){
     }
     std::cout << "The return value is: " << gb->testIsTileValid(3,3) << std::endl;
 
+    return EXIT_SUCCESS;
 }

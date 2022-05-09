@@ -1,4 +1,10 @@
 #include "../GameEngine.h"
+#include "../Menu.h"
+#include "../LinkedList.h"
+#include "../Tile.h"
+#include <map>
+#include <iterator>
+
 
     void testGamePlay();
     int testValueByLetter(Letter letter);
@@ -404,87 +410,217 @@ class TestGameEngine
 
 int main(void){
 
-    Menu *menu = new Menu();
-    menu->loadGame("./savegame.txt");
-    //Needs user input
+    /*
+     * Test 1: valueByLetter() - Return values of tiles by their letter
+     * and compares with a reference of values
+     */
 
     LinkedList* list = new LinkedList();
     TileBag *tb = new TileBag(list);
-    std::cout << tb->getSize() <<std::endl;
-    std::cout << tb->getList() <<std::endl;
+    Tile *b3 = new Tile('B', 3);
 
-    GameBoard *gb = new GameBoard();
+    GameBoard *gb1 = new GameBoard();
+
     Player *p1 = new Player();
     p1->setName("Jo");
     p1->setHand(tb);
-    p1->setScore(0);
+    p1->setScore(40);
     p1->setPassCounter(0);
 
     Player *p2 = new Player();
     p2->setName("Ma");
     p2->setHand(tb);
-    p2->setScore(0);
+    p2->setScore(30);
     p2->setPassCounter(0);
 
     std::vector<Player *> players;
     players.push_back(p1);
     players.push_back(p2);
 
-    GameEngine *ge = new GameEngine(tb, players, gb);
-    ge->saveGame("./savegame2.txt");
+    TestGameEngine *ge1 = new TestGameEngine(tb, players, gb1);
 
-    Player* pl1 = new Player();
-    Player* pl2 = new Player();
-    LinkedList* list = new LinkedList();
-    TileBag* tb = new TileBag(list);
-    GameBoard* gb = new GameBoard();
+    LinkedList* scrTiles = new LinkedList();
+    TileBag *scrValues = new TileBag();
 
-    pl1->setName("test1");
-    pl1->setScore(50);
-    pl1->setPassCounter(0);
-    pl1->setHand(tb);
+    Tile *tA = new Tile('A', 1);
+    Tile *tB = new Tile('B', 3);
+    Tile *tC = new Tile('C', 3);
+    Tile *tD = new Tile('D', 2);
+    Tile *tE = new Tile('E', 1);
+    Tile *tF = new Tile('F', 4);
+    Tile *tG = new Tile('G', 2);
+    Tile *tH = new Tile('H', 4);
+    Tile *tI = new Tile('I', 1);
+    Tile *tJ = new Tile('J', 8);
+    Tile *tK = new Tile('K', 5);
+    Tile *tL = new Tile('L', 1);
+    Tile *tM = new Tile('M', 3);
+    Tile *tN = new Tile('N', 1);
+    Tile *tO = new Tile('O', 1);
+    Tile *tP = new Tile('P', 3);
+    Tile *tQ = new Tile('Q', 10);
+    Tile *tR = new Tile('R', 1);
+    Tile *tS = new Tile('S', 1);
+    Tile *tT = new Tile('T', 1);
+    Tile *tU = new Tile('U', 1);
+    Tile *tV = new Tile('V', 4);
+    Tile *tW = new Tile('W', 4);
+    Tile *tX = new Tile('X', 8);
+    Tile *tY = new Tile('Y', 4);
+    Tile *tZ = new Tile('Z', 10);
 
-    pl1->setName("test2");
-    pl1->setScore(60);
-    pl1->setPassCounter(0);
-    pl1->setHand(tb);
+    scrTiles->addBack(tA);
+    scrTiles->addBack(tB);
+    scrTiles->addBack(tC);
+    scrTiles->addBack(tD);
+    scrTiles->addBack(tE);
+    scrTiles->addBack(tF);
+    scrTiles->addBack(tG);
+    scrTiles->addBack(tH);
+    scrTiles->addBack(tI);
+    scrTiles->addBack(tJ);
+    scrTiles->addBack(tK);
+    scrTiles->addBack(tL);
+    scrTiles->addBack(tM);
+    scrTiles->addBack(tN);
+    scrTiles->addBack(tO);
+    scrTiles->addBack(tP);
+    scrTiles->addBack(tQ);
+    scrTiles->addBack(tR);
+    scrTiles->addBack(tS);
+    scrTiles->addBack(tT);
+    scrTiles->addBack(tU);
+    scrTiles->addBack(tV);
+    scrTiles->addBack(tW);
+    scrTiles->addBack(tX);
+    scrTiles->addBack(tY);
+    scrTiles->addBack(tZ);
 
-    std::vector<Player*> players;
-    players.push_back(pl1);
-    players.push_back(pl2);
+    scrValues->setAsList(scrTiles);
 
-    TestGameEngine* ge = new TestGameEngine(tb, players, gb);
+    std::cout << "Testing valueByLetter() for returning the correct value:" << std:: endl;    
 
-    pl1->setHand(tb);
-    ge->testValueByLetter('X');
-
-
-    //Test 1: Return values of tiles by their letter
-    char 
     for(int i = 0; i < 26; i++){
         char currLetter = ('A' + i);
-        std::cout << currLetter << " has a value of: " << ge->testValueByLetter('A' + i) << std::endl;
+        int scrValue = scrValues->getTile(i)->getValue();
+        if (ge1->testValueByLetter(currLetter) == scrValue){
+            std::cout << currLetter << " value of " << ge1->testValueByLetter(currLetter) << " matches the reference table value: " << scrValue << std::endl;
+            }
+        }
+    std::cout << std::endl << std::endl;
+
+    for (int i = 0; i < scrValues->getSize(); i++)
+    {
+        delete scrValues->getTile(i);
+    }
+
+    //Deconstructor for the TileBag and its LinkedList
+    scrValues->~TileBag();
+
+
+
+    /* 
+     * Test 2: Check game over conditions
+     */ 
+    
+    // 1st Case: TileBag is not empty. Players have tiles and no passes.
+    // Using TestGameEngine *ge1 = new TestGameEngine(tb, players, gb1);
+    std::cout << "Testing checkGameOver() 1st Case: TileBag is not empty. Players have tiles and no passes:" << std:: endl; 
+
+    if (ge1->testCheckGameOver()){
+        std::cout << "Game has reached an endgame condition" << std::endl << std::endl;
+    } else {
+        std::cout << "Game has not reached an endgame condition" << std::endl << std::endl;
+    }
+    
+    
+    //2nd Case: TileBag is empty. Players have tiles and no passes
+    std::cout << "Testing checkGameOver() 2nd Case: TileBag is empty. Players have tiles and no passes:" << std:: endl;
+
+    LinkedList *emptyList = new LinkedList();
+    TileBag *emptyTb = new TileBag(emptyList);
+    TestGameEngine *ge2 = new TestGameEngine(emptyTb, players, gb1);
+
+    if (ge2->testCheckGameOver()){
+        std::cout << "Game has reached an endgame condition" << std::endl << std::endl;
+    } else {
+        std::cout << "Game has not reached an endgame condition" << std::endl << std::endl;
     }
 
 
-    //Test 2: Replace a player's Tile with another from the TileBag
-    
-    Tile* B = new Tile('B', 3);
-    pl2->addToHand(B);
-    //ge->testReplaceTile("B");
-    pl2->printHand();
+    //3rd Case: TileBag is not empty. Players have no tiles and 2 passes
+    std::cout << "Testing checkGameOver() 3rd Case: TileBag is not empty. Players have no tiles and 2 passes:" << std:: endl;
 
-    //Test 3: Check game over conditions
-    //ge->testCheckGameOver
+    Player *p3 = new Player();
+    p3->setName("Mii");
+    p3->addToHand(b3);
+    p3->setScore(0);
+    p3->setPassCounter(2);
+
+    Player *p4 = new Player();
+    p4->setName("Mike");
+    p4->setScore(60);
+    p4->setPassCounter(2);
+
+    std::vector<Player *> players2;
+    players2.push_back(p3);
+    players2.push_back(p4);
+
+    TestGameEngine *ge3 = new TestGameEngine(tb, players2, gb1);
+
+    if (ge3->testCheckGameOver()){
+        std::cout << "Game has reached an endgame condition" << std::endl << std::endl;
+    } else {
+        std::cout << "Game has not reached an endgame condition" << std::endl << std::endl;
+    }
+
+
+    //4th Case: TileBag is empty. Player hands are empty. No passes
+    std::cout << "Testing checkGameOver() 4th Case: TileBag is empty. Player hands are empty. No passes:" << std:: endl;
+
+    Player *p5 = new Player();
+    p5->setName("Mii");
+    p5->addToHand(b3);
+    p5->setScore(0);
+    p5->setPassCounter(0);
+
+    Player *p6 = new Player();
+    p6->setName("Mike");
+    p6->setScore(60);
+    p6->setPassCounter(0);
+
+    std::vector<Player *> players3;
+    players2.push_back(p5);
+    players2.push_back(p6);
+
+    TestGameEngine *ge4 = new TestGameEngine(emptyTb, players3, gb1);
+
+    if (ge4->testCheckGameOver()){
+        std::cout << "Game has reached an endgame condition" << std::endl << std::endl;
+    } else {
+        std::cout << "Game has not reached an endgame condition" << std::endl << std::endl;
+    }
+
+
+    //5th Case: TileBag is empty. Player hands are empty. 2 passes
+    TestGameEngine *ge5 = new TestGameEngine(emptyTb, players2, gb1);
+    std::cout << "Testing checkGameOver() 5th Case: TileBag is empty. Player hands are empty. 2 passes:" << std:: endl;
+
+    if (ge5->testCheckGameOver()){
+        std::cout << "Game has reached an endgame condition" << std::endl << std::endl;
+    } else {
+        std::cout << "Game has not reached an endgame condition" << std::endl << std::endl << std::endl;
+    }
 
 
 
+    /*
+     *Test 3: Player with highest points is the winner
+     */
 
+    std::cout << "Testing printWinner(). Player with highest points should be declared winner:" << std:: endl;
+    ge1->testPrintWinner();
 
-    //Test 4: Player with highest points is the winner
-
-    //ge->testPrintWinner();
-
-
+    return EXIT_SUCCESS;
 }
 

@@ -1,9 +1,0 @@
-Running the tests:
-========================
-Run ./scrabble < ./Tests/TestGameBoardIO/<testname>.input > ./Tests/TestGameBoardIO/<testname>.output to make the output file.
-diff -w ./Tests/TestGameBoardIO/<testname>.output ./Tests/TestGameBoardIO/<testname>.expout to run the IO test.
-
-The test Cases:
-========================
-newBoard tests a new GameBoard and its updated state with added tiles.
-loadedBoard tests a loaded GameBoard and its updated state with added tiles.

@@ -61,6 +61,7 @@ void Menu::runChoice()
         else if (this->choice == 2)
         {
             string load_file;
+            string saveType = ".sav";
 
             cout << "Please enter a filename to load: " << endl;
             cout << "> ";
@@ -70,7 +71,10 @@ void Menu::runChoice()
                 cin.ignore(10000, '\n');
                 cout << "Invalid input" << endl;
             }
-            this->loadGame(load_file);
+            if (load_file.find(saveType) != std::string::npos)
+            {
+                this->loadGame(load_file);
+            }            
         }
         else if (this->choice == 3)
         {
@@ -183,7 +187,7 @@ void Menu::playerSelection(int i)
         cin >> playerName;
 
         // input a valid player name
-        while (cin.fail() || playerName.find_first_of("0123456789") != string::npos || nameHolder == playerName)
+        while (cin.fail() || playerName.find_first_of("0123456789!@#$%^&*()_+-=[]{};':\",./<>\\`~|") != string::npos || nameHolder == playerName)
         {
             cin.clear();
             cin.ignore();

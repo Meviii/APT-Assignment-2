@@ -287,16 +287,13 @@ bool GameEngine::checkGameOver()
 {
     if (tb->getSize() == 0)
     {
-        this->isGameOver = true;
-        return true;
-    }
-
-    for (Player *p : players)
-    {
-        if (p->getHandSize() == 0 || p->getPassCounter() == 2)
+        for (Player *p : players)
         {
-            this->isGameOver = true;
-            return true;
+            if (p->getHandSize() == 0 || p->getPassCounter() == 2)
+            {
+                this->isGameOver = true;
+                return true;
+            }
         }
     }
 
@@ -316,7 +313,8 @@ void GameEngine::printWinner()
     std::cout << "Game Over!" << std::endl;
     
     Player* tmp = new Player();
-    int highest_score = 0;
+    int highest_score = -1;
+    bool isDraw = false;
     for (Player *p : players)
     {
         if (p->getScore() > highest_score)
@@ -325,10 +323,14 @@ void GameEngine::printWinner()
             tmp->setScore(p->getScore());
             highest_score = p->getScore();
         }
+        else if (p->getScore() == highest_score)
+        {
+            isDraw = true;
+        }
         cout << "Score for " << p->getName() << ": " << p->getScore() << endl;
     }
     
-    if (tmp->getScore() == highest_score){
+    if (isDraw){
         std::cout << "There was a TIE!" << std::endl;
         cout << endl;
     }else{
@@ -441,6 +443,4 @@ void GameEngine::saveGame(std::string inputFile)
         }
     }
     gameData.close();
-    //delete tb;
-    //delete gb;
 }

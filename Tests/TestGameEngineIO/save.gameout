@@ -1,13 +1,20 @@
-2
-Joe
-0
-0
-F-4, L-1, P-3, E-1, S-1, T-1, N-1
-Joan
-0
-0
-U-1, Y-4, E-1, C-3, D-2, Z-10, S-1
-O-1, C-3, H-4, T-1, C-3, E-1, G-2, E-1, D-2, I-1, B-3, E-1, U-1, S-1, D-2, Y-4, G-2, J-8, J-8, A-1, E-1, S-1, I-1, S-1, Q-10, U-1, N-1, I-1, O-1, N-1, E-1, E-1, E-1, B-3, A-1, H-4, H-4, I-1, E-1, M-3, G-2, E-1, E-1, E-1, A-1, I-1, R-1, V-4, I-1, R-1, W-4, O-1, N-1, U-1, A-1, S-1, G-2, C-3, E-1, W-4, O-1, V-4, E-1, U-1, A-1, S-1, S-1, I-1, E-1, X-8, J-8, A-1, S-1, E-1, E-1, I-1, E-1, M-3, F-4, Q-10, E-1, S-1, U-1, H-4, O-1
+
+Welcome to Scrabble!
+--------------------
+
+Menu
+----
+
+1. New Game
+2. Load Game
+3. Credits (Show student information)
+4. Quit
+
+Please enter a filename to load: 
+> Your hand is: 
+H-4, T-1, S-1, N-1, I-1, G-2, U-1
+Your hand is: 
+L-1, L-1, R-1, M-3, S-1, N-1, E-1
     0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  
 ---------------------------------------------------------------
 A |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
@@ -17,7 +24,7 @@ D |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 E |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 F |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 G |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-H |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+H |   |   |   |   |   |   |   | R |   |   |   |   |   |   |   |
 I |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 J |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 K |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
@@ -25,3 +32,15 @@ L |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 M |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 N |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 O |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+
+Ja, it's your turn
+
+Score for Ja: 0
+Score for JB: 0
+
+Your hand is: 
+H-4, T-1, S-1, N-1, I-1, G-2, U-1
+> Please enter a filename to save: 
+> Continuing game...
+> Incorrect Input
+> Goodbye!

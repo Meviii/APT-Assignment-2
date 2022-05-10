@@ -78,6 +78,14 @@ void GameEngine::gamePlay()
                     {
                         curr_player->setPassCounter(0);
                     }
+                    if (tile_place_counter == 7)
+                    {
+                        cout << "BINGO!!!" << endl;
+                        cout << "You have scored an additional 50 points" << endl;
+                        curr_player->setScore(curr_player->getScore() + 50);
+                        cout << "Press Enter to continue:" << endl;
+                        cin.ignore();
+                    }
                     changePlayer();
                     turn_end = true;
                     gb->printBoard();
@@ -98,14 +106,7 @@ void GameEngine::gamePlay()
                     if (input.substr(0, 6) == "PLACE " && input.substr(6, 1).size() == 1 && input.substr(8, 3) == "AT " && input.substr(11, 2).size() <= 3)
                     {
                         tile_place_counter += 1;
-                        if (tile_place_counter == 7)
-                        {
-                            cout << "BINGOD!!!" << endl;
-                            cout << "You have scored an additional 50 points" << endl;
-                            curr_player->setScore(curr_player->getScore() + 50);
-                        }
                         placeTile(input);
-                        //curr_player->printHand();
                     }else{
                         std::cout << "Incorrect Input" << std::endl;
                     }

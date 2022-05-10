@@ -97,7 +97,6 @@ void GameEngine::gamePlay()
                             curr_player->setScore(curr_player->getScore() + 50);
                         }
                         placeTile(input);
-                        //curr_player->printHand();
                     }
                     // CHOICE #4: Replaces current players missing Tiles from the TileBag
                 }

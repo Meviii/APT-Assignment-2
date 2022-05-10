@@ -6,6 +6,7 @@ diff -w ./Tests/TestGameEngineIO/<testname>.output ./Tests/TestGameBoardIO/<test
 The test Cases:
 ========================
 passTest tests the result of placing tiles and then passing, passing multiple times, and trying to 'place done' after passing.
-placeDoneTest tests entering the command 'place done' after placing tiles, without placing tiles, after passing.
+placeDoneTest tests entering the command 'place done' after placing tiles, without placing tiles, after passing, lower vs. uppercase
 placeTest tests the 7-letter word BINGO, placing tiles not in the current player's hand, placing at occupied board spaces and invalid inputs.
+replaceTest tests replacing a letter in a player's hand, a letter not in a player's hand, attempting to replace an invalid input (num, special character)
 saveTest tests the save game functionality by loading in a save, and saving it to a different save file. The two save files should be identical. Tests calling SAVE when its not an option,as well as chaining saves.

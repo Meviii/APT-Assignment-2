@@ -1,21 +1,21 @@
 2
 ./Tests/TestGameEngineIO/placeTest.sav
-PLACE G AT D4
-PLACE R AT D5
-PLACE E AT D6
-PLACE A AT D7
-PLACE T AT D8
-PLACE W AT D9
-PLACE T AT D10
-PLACE DONE
-PLACE X AT D11
-PLACE N AT D10
-PLACE 3 AT D12
-PLACE -N AT D11
-PLACE N AT D11
-PLACE DONE
-PLACE XX AT E3
-PLACE DONE
-PLACE y AT E4
-PLACE DONE
-QUIT
+place G at D4
+place R at D5
+place E at D6
+place A at D7
+place T at D8
+place W at D9
+place T at D10
+place Done
+place X at D11
+place N at D10
+place 3 at D12
+place -N at D11
+place N at D11
+place Done
+place XX at E3
+place Done
+place y at E4
+place Done
+quit

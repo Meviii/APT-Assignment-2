@@ -1,0 +1,7 @@
+2
+./Tests/TestGameEngineIO/replaceTest.sav
+replace A
+replace X
+replace 3
+replace -
+quit

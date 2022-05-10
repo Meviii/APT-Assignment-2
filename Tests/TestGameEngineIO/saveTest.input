@@ -1,8 +1,8 @@
-SAVE
+save
 2
 ./Tests/TestGameEngineIO/saveTestIn.sav
-SAVE
+save
 ./Tests/TestGameEngineIO/saveTestOut.sav
-SAVE
+save
 ./Tests/TestGameEngineIO/saveTestOut.sav
-QUIT
+quit

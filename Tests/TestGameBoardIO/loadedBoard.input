@@ -1,7 +1,7 @@
 2
 ./Tests/TestGameBoardIO/loadedGameBoard.sav
-PLACE U AT E6
-PLACE L AT E7
-PLACE L AT E8
-PLACE DONE
-QUIT
+place U at E6
+place L at E7
+place L at E8
+place Done
+quit

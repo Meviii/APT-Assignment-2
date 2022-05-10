@@ -17,12 +17,20 @@ GameEngine::GameEngine(TileBag *tb, std::vector<Player *> players, GameBoard *gb
 // Implementation of the Scrabble game
 void GameEngine::gamePlay()
 {
-
+    // Set player hands
     for (Player *p : players)
     {
         p->setHand(tb);
     }
 
+    // Initiate Board with tile
+    Tile* initTile = new Tile(tb->getFront()->getLetter(),tb->getFront()->getValue());
+    if (gb->isTileValid(7,7)){
+        gb->addTile(7,7,initTile);
+        tb->removeFront();
+    }
+
+    // Initiate player turn
     this->curr_player_turn = 0;
     curr_player = players[curr_player_turn];
 
@@ -98,6 +106,8 @@ void GameEngine::gamePlay()
                         }
                         placeTile(input);
                         //curr_player->printHand();
+                    }else{
+                        std::cout << "Incorrect Input" << std::endl;
                     }
                     // CHOICE #4: Replaces current players missing Tiles from the TileBag
                 }

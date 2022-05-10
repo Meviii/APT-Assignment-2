@@ -28,9 +28,10 @@ void GameEngine::gamePlay()
 
     isGameOver = false;
 
+    gb->printBoard();
+
     while (isGameOver == false)
     {
-        gb->printBoard();
         if (isGameOver == false)
         {
             if (this->checkGameOver() == true)
@@ -71,14 +72,16 @@ void GameEngine::gamePlay()
                     }
                     changePlayer();
                     turn_end = true;
+                    gb->printBoard();
 
                     // CHOICE #2: Current player passing their turn
                 }
-                else if (input == "PASS")
+                else if (input == "PASS" && tile_place_counter == 0)
                 {
                     curr_player->setPassCounter((curr_player->getPassCounter() + 1));
                     changePlayer();
                     turn_end = true;
+                    gb->printBoard();
 
                     // CHOICE #3: Current player placing tiles
                 }
@@ -94,7 +97,7 @@ void GameEngine::gamePlay()
                             curr_player->setScore(curr_player->getScore() + 50);
                         }
                         placeTile(input);
-                        curr_player->printHand();
+                        //curr_player->printHand();
                     }
                     // CHOICE #4: Replaces current players missing Tiles from the TileBag
                 }
@@ -105,6 +108,7 @@ void GameEngine::gamePlay()
 
                         replaceTile(input);
                         turn_end = true;
+                        gb->printBoard();
                     }
                     // CHOICE #5: Quit the game
                 }
@@ -203,7 +207,6 @@ void GameEngine::placeTile(std::string input)
 
         cout << "Added tile to " << positionOnBoard[0] << valueOfPositionOnBoard << endl;
         curr_player->setScore(curr_player->getScore() + (Value)this->valueByLetter(((Letter)charHandLetter)));
-        gb->printBoard();
     }
     else
     {

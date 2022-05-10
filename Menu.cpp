@@ -347,7 +347,7 @@ void Menu::loadGame(string inputFile)
         char tmp_board_char = line[0];
         char board_row_char = line[2];
         int board_col = line[3] - '0';
-        int board_row = gb->boardRow.find(board_row_char)->second;
+        int board_row = ge->boardRow.find(board_row_char)->second;
         Tile *tmp_board_tile = new Tile(tmp_board_char, ge->valueByLetter(tmp_board_char));
  
         gb->addTile(board_row, board_col, tmp_board_tile);

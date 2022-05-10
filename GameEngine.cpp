@@ -126,6 +126,9 @@ void GameEngine::gamePlay()
                 {
                     isGameOver = true;
                     std::cout << "Goodbye!" << std::endl;
+                    delete this->tb;
+                    delete this->gb;
+                    players.~vector();
                     std::abort();
                     // CHOICE #6: Save state of game in the specified save_file
                 }
@@ -201,11 +204,11 @@ void GameEngine::placeTile(std::string input)
     char charHandLetter = tileHandLetter[0];
     Tile *tile_to_place = new Tile((Letter)charHandLetter, (Value)this->valueByLetter(((Letter)charHandLetter)));
 
-    if (gb->isTileValid(gb->boardRow.find(positionOnBoard[0])->second, valueOfPositionOnBoard) && curr_player->isTileInHand(charHandLetter))
+    if (gb->isTileValid(this->boardRow.find(positionOnBoard[0])->second, valueOfPositionOnBoard) && curr_player->isTileInHand(charHandLetter))
     {
 
         // Place Tile
-        gb->addTile(gb->boardRow.find(positionOnBoard[0])->second, valueOfPositionOnBoard, tile_to_place); // place tile
+        gb->addTile(this->boardRow.find(positionOnBoard[0])->second, valueOfPositionOnBoard, tile_to_place); // place tile
         // Remove Tile
         curr_player->removeTileInHand(charHandLetter);
 
@@ -326,6 +329,10 @@ void GameEngine::printWinner()
     cout << "Player " << tmp->getName() << " won!" << endl;
     cout << endl;
     cout << "Goodbye!" << endl;
+
+    delete this->tb;
+    delete this->gb;
+    players.~vector();
     return;
 }
 

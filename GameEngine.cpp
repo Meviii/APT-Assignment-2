@@ -336,9 +336,6 @@ void GameEngine::printWinner()
         cout << endl;
     }
     cout << "Goodbye!" << endl;
-    delete this->tb;
-    delete this->gb;
-    players.~vector();
     abort();
     return;
 }
@@ -416,11 +413,7 @@ void GameEngine::saveGame(std::string inputFile)
             {
                 if (board[row][col] == nullptr)
                 {
-                    gameData << "| ";
-                }
-                else if (board[row][col] != nullptr && board[row][col]->getLetter() == ' ')
-                {
-                    gameData << "| " << board[row][col]->getLetter() << " ";
+                    gameData << "|   ";
                 }
                 else
                 {
@@ -448,4 +441,6 @@ void GameEngine::saveGame(std::string inputFile)
         }
     }
     gameData.close();
+    //delete tb;
+    //delete gb;
 }

@@ -63,5 +63,7 @@ void GameBoard::printBoard()
  */
 bool GameBoard::isTileValid(int row, int col)
 { // Area checks, open tile check
+
     return row < BOARD_SIZE && col < BOARD_SIZE && board[row][col] == NULL;
+    
 }

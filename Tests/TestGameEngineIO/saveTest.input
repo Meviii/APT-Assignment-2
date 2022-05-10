@@ -1,6 +1,7 @@
-save
 2
 ./Tests/TestGameEngineIO/saveTestIn.sav
+save
+./Tests/TestGameEngineIO/saveTestOut.sav
 save
 ./Tests/TestGameEngineIO/saveTestOut.sav
 save

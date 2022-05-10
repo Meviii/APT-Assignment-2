@@ -1,6 +1,6 @@
 2
 fakefile.sav
 2
-Menu.cpp
+savegame.txt
 ./Tests/TestMenuIO/testLoad.sav
 quit

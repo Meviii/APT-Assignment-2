@@ -326,13 +326,19 @@ void GameEngine::printWinner()
         }
         cout << "Score for " << p->getName() << ": " << p->getScore() << endl;
     }
-    cout << "Player " << tmp->getName() << " won!" << endl;
-    cout << endl;
+    
+    if (tmp->getScore() == highest_score){
+        std::cout << "There was a TIE!" << std::endl;
+        cout << endl;
+    }else{
+        cout << "Player " << tmp->getName() << " won!" << endl;
+        cout << endl;
+    }
     cout << "Goodbye!" << endl;
-
     delete this->tb;
     delete this->gb;
     players.~vector();
+    abort();
     return;
 }
 

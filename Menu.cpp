@@ -10,6 +10,7 @@ Menu::Menu()
 
 Menu::~Menu() {}
 
+// Engine to run Menu
 void Menu::runMenu()
 {
     this->choice = 0;
@@ -31,6 +32,7 @@ void Menu::runMenu()
     this->runChoice();
 }
 
+// Menu printer
 void Menu::printMenu()
 {
     // print the detailed system viewer
@@ -44,6 +46,7 @@ void Menu::printMenu()
     cout << endl;
 }
 
+// Choice selector
 void Menu::runChoice()
 {
     // while true, continue
@@ -96,6 +99,7 @@ void Menu::runChoice()
     cout << "Goodbye!" << endl;
 }
 
+// Print credentials
 void Menu::printCredits()
 {
     // print the detailed personal info
@@ -121,6 +125,7 @@ void Menu::printCredits()
     cout << endl;
 }
 
+// Load Players to new game.
 void Menu::playerCheck()
 {
     int player_count;
@@ -160,11 +165,11 @@ void Menu::playerCheck()
         this->runMenu();
     }
 }
-
+// Individual player setter
 void Menu::playerSelection(int i)
 {
-    string player_name;
-
+    string playerName;
+    string nameHolder; // to check previously entered name
     for (int x = 1; x < i + 1; x++)
     {
         if (x == i + 5)
@@ -175,31 +180,33 @@ void Menu::playerSelection(int i)
         // input the user name
         cout << "Enter a name for player " << x << ": " << endl;
         cout << "> ";
-        cin >> player_name;
+        cin >> playerName;
 
         // input a valid player name
-        while (cin.fail() || player_name.find_first_of("0123456789") != string::npos)
+        while (cin.fail() || playerName.find_first_of("0123456789") != string::npos || nameHolder == playerName)
         {
             cin.clear();
             cin.ignore();
             cout << "Please enter a valid name." << endl;
-            cin >> player_name;
+            std::cout << "> ";
+            cin >> playerName;
         }
 
         // create a new player and push it at the end of the vector
         Player *tmp_p = new Player();
-        tmp_p->setName(player_name);
+        nameHolder = playerName;
+        tmp_p->setName(playerName);
         tmp_p->setScore(0);
         tmp_p->setPassCounter(0);
         players.push_back(tmp_p);
-        cout << "Player" << x << " name set to: " << player_name << endl;
+        cout << "Player" << x << " name set to: " << playerName << endl;
         cin.clear();
     }
     cout << endl;
 }
 
 /**
- * @brief check weather there are two players
+ * @brief check weather there two player mode is enabled
  *
  * @return true
  * @return false

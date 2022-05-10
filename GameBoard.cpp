@@ -11,14 +11,6 @@ GameBoard::GameBoard()
     gameRow.assign(BOARD_SIZE, nullptr);
     board.assign(BOARD_SIZE, gameRow);
 
-    for (int row = 0; row < (this->getSize()); row++)
-    {
-        for (int col = 0; col < (this->getSize()); col++)
-        {
-            Tile *tmp = new Tile(' ', 0);
-            board[row][col] = tmp;
-        }
-    }
 }
 
 std::vector<std::vector<Tile *>> GameBoard::getBoard()
@@ -53,7 +45,7 @@ void GameBoard::printBoard()
         {
             if (board[row][col] == nullptr)
             {
-                std::cout << "| ";
+                std::cout << "|   ";
             }
             else
             {
@@ -71,5 +63,5 @@ void GameBoard::printBoard()
  */
 bool GameBoard::isTileValid(int row, int col)
 { // Area checks, open tile check
-    return row < BOARD_SIZE && col < BOARD_SIZE && (board[row][col] == NULL || board[row][col]->getLetter() == ' ');
+    return row < BOARD_SIZE && col < BOARD_SIZE && board[row][col] == NULL;
 }

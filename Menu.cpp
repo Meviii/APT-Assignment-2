@@ -269,7 +269,9 @@ void Menu::loadGame(string inputFile)
         cout << "Error loading game" << endl;
         this->runMenu();
     }
- 
+    // GET CURRENT PLAYER INDEX
+    int current_player_index;
+    gameData >> current_player_index;
     // GET PLAYER COUNT
     int pl_count;
     gameData >> pl_count;
@@ -362,6 +364,8 @@ void Menu::loadGame(string inputFile)
         gb->addTile(board_row, board_col, tmp_board_tile);
     }
 
+    // set current player
+    ge->curr_player_turn = current_player_index;
     // start playing the game
     ge->gamePlay();
 }

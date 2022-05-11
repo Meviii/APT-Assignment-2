@@ -31,7 +31,7 @@ void GameEngine::gamePlay()
     }
 
     // Initiate player turn
-    this->curr_player_turn = 0;
+    //this->curr_player_turn = 0;
     curr_player = players[curr_player_turn];
 
     isGameOver = false;
@@ -369,6 +369,16 @@ void GameEngine::saveGame(std::string inputFile)
     }
     else
     {
+        // Save current player index
+        int count = 0;
+        int players_list_size = players.size();
+        for (int i = 0; i < players_list_size; i++){
+            if (i == curr_player_turn){
+                gameData << count << "\n";
+            }
+            count += 1;
+        }
+
         // Save player amount
         gameData << players.size() << "\n";
 

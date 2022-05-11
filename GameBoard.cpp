@@ -62,6 +62,33 @@ void GameBoard::printBoard()
  * and if the Tile is open
  */
 bool GameBoard::isTileValid(int row, int col)
-{ // Area checks, open tile check
-    return row < BOARD_SIZE && col < BOARD_SIZE && board[row][col] == NULL;
+{
+    return row < BOARD_SIZE && col < BOARD_SIZE && board[row][col] == NULL && row >= 0 && col >= 0;
+    
+}
+
+/*
+ * Checks for adjacency of tile
+ * Returns true if Tile is within GameBoard bounds
+ * and if the Tile is open
+ */
+bool GameBoard::isTileAdj(int row, int col) 
+{   
+    if ((row-1) < BOARD_SIZE && (row-1) >= 0) {
+        if (row+1 < BOARD_SIZE && (row+1) >= 0){
+            if (col-1 < BOARD_SIZE && (col-1) >= 0){
+                if (col+1 < BOARD_SIZE && (col+1) >= 0){
+                    if (board[(row-1)][col] != NULL || board[(row+1)][col] != NULL || board[row][(col-1)] != NULL || board[row][(col+1)] != NULL)
+                    {
+                        return true;
+                    }    
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    return false;
 }

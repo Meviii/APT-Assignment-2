@@ -210,23 +210,27 @@ void GameEngine::placeTile(std::string input)
 
     char charHandLetter = tileHandLetter[0];
     Tile *tile_to_place = new Tile((Letter)charHandLetter, (Value)this->valueByLetter(((Letter)charHandLetter)));
-
+    std::vector<std::vector<Tile *>> board = gb->getBoard();
     if (gb->isTileValid(this->boardRow.find(positionOnBoard[0])->second, valueOfPositionOnBoard) && curr_player->isTileInHand(charHandLetter))
     {
-
-        // Place Tile
-        gb->addTile(this->boardRow.find(positionOnBoard[0])->second, valueOfPositionOnBoard, tile_to_place); // place tile
-        // Remove Tile
-        curr_player->removeTileInHand(charHandLetter);
-
-        // Draw Tile if available
-        if (curr_player->canDrawTile(tb))
+        if (gb->isTileAdj((this->boardRow.find(positionOnBoard[0])->second), valueOfPositionOnBoard) == true)
         {
-            curr_player->drawTile(tb);
-        }
+            // Place Tile
+            gb->addTile(this->boardRow.find(positionOnBoard[0])->second, valueOfPositionOnBoard, tile_to_place); // place tile
+            // Remove Tile
+            curr_player->removeTileInHand(charHandLetter);
+            // Draw Tile if available
+            if (curr_player->canDrawTile(tb))
+            {
+                curr_player->drawTile(tb);
+            }
 
-        cout << "Added tile to " << positionOnBoard[0] << valueOfPositionOnBoard << endl;
-        curr_player->setScore(curr_player->getScore() + (Value)this->valueByLetter(((Letter)charHandLetter)));
+            cout << "Added tile to " << positionOnBoard[0] << valueOfPositionOnBoard << endl;
+            curr_player->setScore(curr_player->getScore() + (Value)this->valueByLetter(((Letter)charHandLetter)));
+            gb->printBoard();
+        }else{
+            cout << "Please place next to another tile" << endl;
+        }
     }
     else
     {

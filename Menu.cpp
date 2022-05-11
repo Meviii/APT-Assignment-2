@@ -17,6 +17,7 @@ void Menu::runMenu()
     this->printMenu();
 
     // get a valid user choice from the stdin
+    std::cout << "> ";
     while (!(cin >> this->choice))
     {
         if (this->choice == 99)

@@ -22,6 +22,7 @@ public:
     void addTile(int row, int col, Tile *tile);
     int getSize();
     bool isTileValid(int row, int col);
+    bool isTileAdj(int row, int col);
 private:
     std::vector<Tile *> gameRow;
     std::vector<std::vector<Tile *>> board;

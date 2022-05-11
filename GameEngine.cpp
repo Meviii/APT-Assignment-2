@@ -74,24 +74,28 @@ void GameEngine::gamePlay()
                 // CHOICE #1: Current player has finished placing Tiles
                 if (input == "PLACE DONE")
                 {
-                    if (curr_player->getPassCounter() == 1)
-                    {
-                        curr_player->setPassCounter(0);
+                    if (tile_place_counter > 0){
+                        if (curr_player->getPassCounter() == 1)
+                        {
+                            curr_player->setPassCounter(0);
+                        }
+                        if (tile_place_counter == 7)
+                        {
+                            cout << "BINGO!!!" << endl;
+                            cout << "You have scored an additional 50 points" << endl;
+                            curr_player->setScore(curr_player->getScore() + 50);
+                            cout << "Press Enter to continue:" << endl;
+                            cin.ignore();
+                        }
+                        changePlayer();
+                        turn_end = true;
+                        gb->printBoard();
+                    }else{
+                        std::cout << "Please palce a tile first." << std::endl;
                     }
-                    if (tile_place_counter == 7)
-                    {
-                        cout << "BINGO!!!" << endl;
-                        cout << "You have scored an additional 50 points" << endl;
-                        curr_player->setScore(curr_player->getScore() + 50);
-                        cout << "Press Enter to continue:" << endl;
-                        cin.ignore();
-                    }
-                    changePlayer();
-                    turn_end = true;
-                    gb->printBoard();
 
-                    // CHOICE #2: Current player passing their turn
                 }
+                // CHOICE #2: Current player passing their turn
                 else if (input == "PASS" && tile_place_counter == 0)
                 {
                     curr_player->setPassCounter((curr_player->getPassCounter() + 1));
@@ -99,8 +103,8 @@ void GameEngine::gamePlay()
                     turn_end = true;
                     gb->printBoard();
 
-                    // CHOICE #3: Current player placing tiles
                 }
+                // CHOICE #3: Current player placing tiles
                 else if (this->argTokenizer(input).size() == 4)
                 {
                     if (input.substr(0, 6) == "PLACE " && input.substr(6, 1).size() == 1 && input.substr(8, 3) == "AT " && input.substr(11, 2).size() <= 3)
@@ -110,8 +114,8 @@ void GameEngine::gamePlay()
                     }else{
                         std::cout << "Incorrect Input" << std::endl;
                     }
-                    // CHOICE #4: Replaces current players missing Tiles from the TileBag
                 }
+                // CHOICE #4: Replaces current players missing Tiles from the TileBag
                 else if (this->argTokenizer(input).size() == 2)
                 {
                     if (input.substr(0, 8) == "REPLACE " && input.substr(6, 1).size() == 1)
@@ -120,9 +124,11 @@ void GameEngine::gamePlay()
                         replaceTile(input);
                         turn_end = true;
                         gb->printBoard();
+                    }else{
+                        std::cout << "Invalid Input" << std::endl;
                     }
-                    // CHOICE #5: Quit the game
                 }
+                // CHOICE #5: Quit the game
                 else if (input == "QUIT")
                 {
                     isGameOver = true;
@@ -131,8 +137,8 @@ void GameEngine::gamePlay()
                     delete this->gb;
                     players.~vector();
                     std::abort();
-                    // CHOICE #6: Save state of game in the specified save_file
                 }
+                // CHOICE #6: Save state of game in the specified save_file
                 else if (input == "SAVE")
                 {
                     std::string save_file;

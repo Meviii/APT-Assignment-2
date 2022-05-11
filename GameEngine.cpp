@@ -91,7 +91,7 @@ void GameEngine::gamePlay()
                         turn_end = true;
                         gb->printBoard();
                     }else{
-                        std::cout << "Please palce a tile first." << std::endl;
+                        std::cout << "Please place a tile first." << std::endl;
                     }
 
                 }
@@ -355,7 +355,8 @@ void GameEngine::printWinner()
 void GameEngine::saveGame(std::string inputFile)
 {
     std::ofstream gameData;
-
+    string saveType = ".sav";
+    inputFile.append(saveType);
     gameData.open(inputFile);
 
     if (!gameData)

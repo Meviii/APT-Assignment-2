@@ -65,16 +65,20 @@ void Menu::runChoice()
 
             cout << "Please enter a filename to load: " << endl;
             cout << "> ";
-            while (!(cin >> load_file))
+            while (!(cin >> load_file) || cin.fail())
             {
                 cin.clear();
                 cin.ignore(10000, '\n');
-                cout << "Invalid input" << endl;
+                cout << "Invalid file" << endl;
             }
-            if (load_file.find(saveType) != std::string::npos)
+            if (load_file.find(saveType) == std::string::npos){
+                load_file.append(saveType);
+                this->loadGame(load_file);
+            }
+            else if (load_file.find(saveType) != std::string::npos)
             {
                 this->loadGame(load_file);
-            }            
+            }
         }
         else if (this->choice == 3)
         {

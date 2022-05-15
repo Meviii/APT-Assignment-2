@@ -1,6 +1,7 @@
 2
 ./Tests/TestGameEngineIO/saveIn.sav
 save
-Menu.cpp
 ./Tests/TestGameEngineIO/saveOut.sav
+save
+./Tests/TestGameEngineIO/saveOut
 quit

@@ -10,22 +10,11 @@ Menu
 3. Credits (Show student information)
 4. Quit
 
-Please enter a filename to load: 
-> Error loading game
-Menu
-----
-
-1. New Game
-2. Load Game
-3. Credits (Show student information)
-4. Quit
-
-Please enter a filename to load: 
 > Please enter a filename to load: 
 > Your hand is: 
-I-1, E-1, O-1, L-1, R-1, E-1, E-1
+H-4, T-1, S-1, N-1, I-1, G-2, U-1
 Your hand is: 
-A-1, V-4, N-1, E-1, S-1, E-1, E-1
+L-1, L-1, R-1, M-3, S-1, N-1, E-1
     0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  
 ---------------------------------------------------------------
 A |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
@@ -44,11 +33,15 @@ M |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 N |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 O |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 
-Jin, it's your turn
+Ja, it's your turn
 
-Score for Jin: 0
-Score for Jodie: 0
+Score for Ja: 0
+Score for JB: 0
 
 Your hand is: 
-I-1, E-1, O-1, L-1, R-1, E-1, E-1
+H-4, T-1, S-1, N-1, I-1, G-2, U-1
+> Please enter a filename to save: 
+> Continuing game...
+> Please enter a filename to save: 
+> Continuing game...
 > Goodbye!

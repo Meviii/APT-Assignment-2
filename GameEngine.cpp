@@ -235,7 +235,6 @@ void GameEngine::placeTile(std::string input)
     else
     {
         cout << "You cannot place that tile" << endl;
-        cout << endl;
     }
 }
 
@@ -360,7 +359,10 @@ void GameEngine::saveGame(std::string inputFile)
 {
     std::ofstream gameData;
     string saveType = ".sav";
-    inputFile.append(saveType);
+    if (inputFile.find(saveType) == std::string::npos)
+    {
+        inputFile.append(saveType);
+    }
     gameData.open(inputFile);
 
     if (!gameData)

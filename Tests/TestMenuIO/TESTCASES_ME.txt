@@ -1,10 +1,10 @@
 Running the tests:
 ========================
-Run ./scrabble < ./Tests/TestGameBoardIO/<testname>.input > ./Tests/TestGameBoardIO/<testname>.output to make the output file.
-diff -w ./Tests/TestGameBoardIO/<testname>.output ./Tests/TestGameBoardIO/<testname>.gameout to run the IO test.
+Run ./scrabble < ./Tests/TestMenuIO/<testname>.input > ./Tests/TestMenuIO/<testname>.output to make the output file.
+diff -w ./Tests/TestMenuIO/<testname>.output ./Tests/TestMenuIO/<testname>.gameout to run the IO test.
 
 The test Cases:
 ========================
-load.input attempts to load a non-existant file, a file with filetype other than .sav, then loads a valid savefile
-newGame.input tests player name formating, allowed characters (letters), no duplicate names, and if a new game is started. diff won't work properly due to random nature of new games.
-credits.input displays the programmers details
+loadValidFiles attempts to load a non-existant file, a file with filetype other than .sav, then loads a valid savefile
+newGameNameValidity tests player name formating, allowed characters (letters), no duplicate names, and if a new game is started. diff won't work properly due to random nature of new games.
+printCredits displays the programmers details

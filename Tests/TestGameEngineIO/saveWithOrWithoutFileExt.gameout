@@ -10,7 +10,7 @@ Menu
 3. Credits (Show student information)
 4. Quit
 
-Please enter a filename to load: 
+> Please enter a filename to load: 
 > Your hand is: 
 H-4, T-1, S-1, N-1, I-1, G-2, U-1
 Your hand is: 
@@ -42,5 +42,6 @@ Your hand is:
 H-4, T-1, S-1, N-1, I-1, G-2, U-1
 > Please enter a filename to save: 
 > Continuing game...
-> Incorrect Input
+> Please enter a filename to save: 
+> Continuing game...
 > Goodbye!

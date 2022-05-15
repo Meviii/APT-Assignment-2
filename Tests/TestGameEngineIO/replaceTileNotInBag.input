@@ -1,7 +1,5 @@
 2
 ./Tests/TestGameEngineIO/replaceTile.sav
-replace A
 replace X
-replace 3
-replace -
+replace A
 quit

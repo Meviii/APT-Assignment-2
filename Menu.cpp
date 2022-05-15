@@ -300,10 +300,22 @@ void Menu::loadGame(string inputFile)
         for (int i = 0; i < 7; i++)
         {
             char tmp_char = line[0 + x];
-            int tmp_value = line[2 + x] - '0';
-            Tile *tmp_tl = new Tile(tmp_char, tmp_value);
-            tmp_pl->addToHand(tmp_tl);
-            x += 5;
+            if(tmp_char == 'Q' || tmp_char == 'Z')
+            {
+                int tmp_value = line[2 + x] - '0';
+                tmp_value *= 10;
+                Tile *tmp_tl = new Tile(tmp_char, tmp_value);
+                tmp_pl->addToHand(tmp_tl);
+                x += 6;
+            }
+            else
+            {
+                int tmp_value = line[2 + x] - '0';
+                Tile *tmp_tl = new Tile(tmp_char, tmp_value);
+                tmp_pl->addToHand(tmp_tl);
+                x += 5;
+            }
+            
         }
         // setters
         // initialize the loader player
@@ -328,7 +340,6 @@ void Menu::loadGame(string inputFile)
         Tile *tmp_tile = new Tile(tmp_tb_char, tmp_tb_int);
         tile_bag.push_back(tmp_tile);
     }
-    //tb->~TileBag();
  
     int new_tb_size = tile_bag.size();
  
@@ -336,7 +347,6 @@ void Menu::loadGame(string inputFile)
     {
         // initialize the TileBag object
         Tile* tmp = new Tile(tile_bag[tl]->getLetter(), tile_bag[tl]->getValue());
-        //list->addBack(tmp);
         tb->addBack(tmp);
     }
  

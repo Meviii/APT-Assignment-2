@@ -1,6 +1,6 @@
 2
 ./Tests/TestGameBoardIO/loadedBoard.sav
-place V at I7
-place E at J7
+place Q at H6
+place E at H8
 place Done
 quit

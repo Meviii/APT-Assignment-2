@@ -5,5 +5,5 @@ diff -w ./Tests/TestGameBoardIO/<testname>.output ./Tests/TestGameBoardIO/<testn
 
 The test Cases:
 ========================
-newBoard.input tests a new GameBoard and its state upon starting a game. it is not possible to load a new board and due to the random element diff won't work correctly here
-loadedBoard.input tests a loaded GameBoard and its updated state with added tiles.
+newBoard tests a new GameBoard and its state upon starting a game. it is not possible to load a new board and due to the random element diff won't work correctly here
+loadedBoard tests a loaded GameBoard and its updated state with added tiles.

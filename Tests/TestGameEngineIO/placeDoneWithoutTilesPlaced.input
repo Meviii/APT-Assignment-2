@@ -1,10 +1,6 @@
 2
 ./Tests/TestGameEngineIO/placeDone.sav
-place R at H5
 place I at H6
 place Done
 place Done
-pass
-place Done
-PLACE DONE
 quit

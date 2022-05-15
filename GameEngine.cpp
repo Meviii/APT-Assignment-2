@@ -84,8 +84,6 @@ void GameEngine::gamePlay()
                             cout << "BINGO!!!" << endl;
                             cout << "You have scored an additional 50 points" << endl;
                             curr_player->setScore(curr_player->getScore() + 50);
-                            cout << "Press Enter to continue:" << endl;
-                            cin.ignore();
                         }
                         changePlayer();
                         turn_end = true;
